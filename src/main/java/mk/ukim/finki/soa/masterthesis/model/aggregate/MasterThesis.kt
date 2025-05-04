@@ -13,6 +13,7 @@ import mk.ukim.finki.soa.masterthesis.model.common.LabeledEntity
 import mk.ukim.finki.soa.masterthesis.model.valueObject.*
 import mk.ukim.finki.soa.masterthesis.model.common.Identifier
 import mk.ukim.finki.soa.masterthesis.model.exception.StudentNotEligibleException
+import mk.ukim.finki.soa.masterthesis.service.StudentService
 import org.axonframework.commandhandling.CommandHandler
 import org.axonframework.modelling.command.AggregateIdentifier
 import org.axonframework.modelling.command.AggregateLifecycle

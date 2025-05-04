@@ -7,6 +7,6 @@ import java.time.ZonedDateTime
 data class CompletedThesisApprovedEvent(
     val thesisId: MasterThesisId,
     val approveId: ProfessorId,
-    val finalGrade: String,
+    val finalGrade: Int,
     val approvedAt: ZonedDateTime
 )

@@ -7,7 +7,7 @@ import java.time.ZonedDateTime
 data class ThesisEvaluatedEvent(
     val thesisId: MasterThesisId,
     val committeeId: AppRole,
-    val evaluation: String,
+    val evaluation: Int,
     val isApproved: Boolean,
     val evaluatedAt: ZonedDateTime
 )

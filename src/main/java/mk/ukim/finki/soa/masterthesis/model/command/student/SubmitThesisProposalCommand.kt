@@ -1,11 +1,10 @@
 package mk.ukim.finki.soa.masterthesis.model.command.student
 
-import mk.ukim.finki.soa.masterthesis.model.valueObject.MasterThesisDocumentType
-import mk.ukim.finki.soa.masterthesis.model.valueObject.StudentId
-import java.time.ZonedDateTime
+import mk.ukim.finki.soa.masterthesis.model.valueObject.*
 
 data class SubmitThesisProposalCommand(
-    val studentId: StudentId,
-    val proposalDocument: MasterThesisDocumentType,
-    val timestamp: ZonedDateTime
+    val studentIndex: StudentIndex,
+    val title: MasterThesisTitle,
+    val area: MasterThesisArea,
+    val description: MasterThesisDescription
 )

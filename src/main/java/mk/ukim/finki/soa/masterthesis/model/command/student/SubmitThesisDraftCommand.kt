@@ -2,13 +2,14 @@ package mk.ukim.finki.soa.masterthesis.model.command.student
 
 import mk.ukim.finki.soa.masterthesis.model.valueObject.MasterThesisDocumentType
 import mk.ukim.finki.soa.masterthesis.model.valueObject.MasterThesisId
-import mk.ukim.finki.soa.masterthesis.model.valueObject.StudentId
+import mk.ukim.finki.soa.masterthesis.model.valueObject.StudentIndex
 import java.time.ZonedDateTime
 
 data class SubmitThesisDraftCommand(
     val thesisId: MasterThesisId,
-    val studentId: StudentId,
-    val draftDocument: MasterThesisDocumentType,
+    val studentIndex: StudentIndex,
+    val draftDocumentType: MasterThesisDocumentType,
     val draftVersion: Int,
-    val timestamp: ZonedDateTime
+    val draftText: ByteArray,
+    val submittedAt: ZonedDateTime
 )

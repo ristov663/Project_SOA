@@ -7,6 +7,6 @@ import java.time.ZonedDateTime
 data class ApproveCompletedThesisCommand(
     val thesisId: MasterThesisId,
     val approveId: ProfessorId,
-    val finalGrade: String,
+    val finalGrade: Int,
     val timestamp: ZonedDateTime
 )

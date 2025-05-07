@@ -10,6 +10,5 @@ class KafkaEventListener {
     fun onMessage(record: ConsumerRecord<String, String>) {
         val key = record.key()
         val payload = record.value()
-
     }
 }

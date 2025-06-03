@@ -1,7 +1,7 @@
 package mk.ukim.finki.soa.masterthesis.model.valueObject
 
 enum class MasterThesisStatus(
-    val order: Double,
+    val masterOrder: Double,
     val displayName: String
 ) {
 
@@ -29,7 +29,7 @@ enum class MasterThesisStatus(
     fun getNextStatusFromCurrent(): MasterThesisStatus? {
         val statuses = MasterThesisStatus.values()
         for (i in 0 until statuses.size - 1) {
-            if (statuses[i].order == this.order) {
+            if (statuses[i].masterOrder == this.masterOrder) {
                 return statuses[i + 1]
             }
         }
@@ -39,7 +39,7 @@ enum class MasterThesisStatus(
     fun getPreviousStatusFromCurrent(): MasterThesisStatus? {
         val statuses = MasterThesisStatus.values()
         for (i in 0 until statuses.size - 1) {
-            if (statuses[i].order == this.order - 1) {
+            if (statuses[i].masterOrder == this.masterOrder - 1) {
                 return statuses[i]
             }
         }
@@ -47,6 +47,6 @@ enum class MasterThesisStatus(
     }
 
     override fun toString(): String {
-        return "MasterThesisStatus(order=$order, displayName='$displayName')"
+        return "MasterThesisStatus(masterOrder=$masterOrder, displayName='$displayName')"
     }
 }

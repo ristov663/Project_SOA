@@ -70,10 +70,13 @@ class MasterThesis : LabeledEntity {
 
     private var location: String? = null
 
+    @Column(name = "presentation_start_time")
     private var presentationStartTime: ZonedDateTime? = null
 
+    @Column(name = "last_update")
     private lateinit var lastUpdate: ZonedDateTime
 
+    @Column(name = "master_thesis_due_date")
     private var masterThesisDueDate: ZonedDateTime? = null
 
     @Embedded
@@ -95,21 +98,32 @@ class MasterThesis : LabeledEntity {
     // Required no-arg constructor for JPA
     constructor()
 
-    @CommandHandler
-    constructor(command: InitiateThesisRegistrationCommand, studentService: StudentService) {
-        // Validation
-        if (!studentService.isStudentEligible(command.studentIndex)) {
-            throw StudentNotEligibleException(command.studentIndex)
-        }
+//    @CommandHandler
+//    constructor(command: InitiateThesisRegistrationCommand, studentService: StudentService) {
+//        // Validation
+//        if (!studentService.isStudentEligible(command.studentIndex)) {
+//            throw StudentNotEligibleException(command.studentIndex)
+//        }
+//
+//        val event = ThesisRegistrationInitiatedEvent(
+//            studentIndex = command.studentIndex,
+//            initiatedAt = command.timestamp
+//        )
+//
+//        this.on(event)
+//        AggregateLifecycle.apply(event)
+//    }
 
+    @CommandHandler
+    constructor(command: InitiateThesisRegistrationCommand) {
         val event = ThesisRegistrationInitiatedEvent(
             studentIndex = command.studentIndex,
             initiatedAt = command.timestamp
         )
-
         this.on(event)
         AggregateLifecycle.apply(event)
     }
+
 
     @CommandHandler
     fun submitThesisProposal(command: SubmitThesisProposalCommand) {

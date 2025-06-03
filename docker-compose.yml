@@ -11,6 +11,15 @@ services:
     ports:
       - "5435:5432"
     container_name: master_thesis_db
+    networks:
+      - thesis_services_net
+  consul:
+    image: hashicorp/consul
+    container_name: dev-consul
+    ports:
+      - "8500:8500"
+    networks:
+      - thesis_services_net
   master_thesis_backend:
     depends_on:
       - master_thesis_db
@@ -28,9 +37,18 @@ services:
       SPRING_DATASOURCE_PASSWORD: admin
       SPRING_DATASOURCE_SCHEMA: public
       OPTIMIZE_EVENT_CONSUMPTION: "false"
+      spring.cloud.consul.host: "dev-consul"
+      spring.cloud.discovery.discovery.hostname: "master_thesis_backend"
+      spring.cloud.discovery.discovery.prefer-ip-address=false: "false"
     volumes:
       - dms-data:/opt/dms
+    networks:
+      - thesis_services_net
 volumes:
   db-data:
   dms-data:
   es-data:
+networks:
+  thesis_services_net:
+    name: thesis_services_net
+    driver: bridge

@@ -1,0 +1,48 @@
+{
+  "provider": {
+    "name": "student_provider"
+  },
+  "consumer": {
+    "name": "master_thesis_consumer"
+  },
+  "interactions": [
+    {
+      "description": "A request to fetch student by ID",
+      "request": {
+        "method": "GET",
+        "path": "/students/Student:00000000-0000-0000-0000-000000000001"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "id": {
+            "value": "Student:00000000-0000-0000-0000-000000000001"
+          },
+          "name": "Anastasija Tashkova",
+          "email": "anastasija.tashkova@students.finki.ukim.mk",
+          "studentIndex": "211299",
+          "enrollment": {
+            "program": "Software engineering and information systems",
+            "year": 4
+          }
+        }
+      },
+      "providerStates": [
+        {
+          "name": "Student with ID Student:00000000-0000-0000-0000-000000000001 exists"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "3.0.0"
+    },
+    "pact-jvm": {
+      "version": "3.6.3"
+    }
+  }
+}

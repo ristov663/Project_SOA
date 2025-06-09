@@ -20,7 +20,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @PactTestFor(providerName = "student_provider", hostInterface = "localhost")
 class PactStudentServiceUnitTest {
 
-    @Pact(consumer = "finance_consumer")
+    @Pact(consumer = "master_thesis_consumer")
     public RequestResponsePact getStudentById(PactDslWithProvider builder) {
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");

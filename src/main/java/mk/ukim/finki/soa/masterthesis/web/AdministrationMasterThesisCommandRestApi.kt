@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
-import mk.ukim.finki.soa.masterthesis.model.command.administration.ApproveCompletedThesisCommand
-import mk.ukim.finki.soa.masterthesis.model.command.administration.EvaluateThesisCommand
+import mk.ukim.finki.soa.masterthesis.model.oldCommands.administration.ApproveCompletedThesisCommand
+import mk.ukim.finki.soa.masterthesis.model.oldCommands.administration.EvaluateThesisCommand
 import mk.ukim.finki.soa.masterthesis.service.AdministrationMasterThesisService
 import mk.ukim.finki.soa.masterthesis.web.dto.*
 

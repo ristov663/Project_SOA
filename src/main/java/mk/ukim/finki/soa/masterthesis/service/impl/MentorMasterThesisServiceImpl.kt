@@ -1,9 +1,9 @@
 package mk.ukim.finki.soa.masterthesis.service.impl
 
-import mk.ukim.finki.soa.masterthesis.model.command.mentor.ApproveThesisProposalCommand
-import mk.ukim.finki.soa.masterthesis.model.command.mentor.MentorReviewProposalCommand
-import mk.ukim.finki.soa.masterthesis.model.command.mentor.ReviewThesisDraftCommand
-import mk.ukim.finki.soa.masterthesis.model.command.mentor.ScheduleThesisDefenseCommand
+import mk.ukim.finki.soa.masterthesis.model.oldCommands.mentor.ApproveThesisProposalCommand
+import mk.ukim.finki.soa.masterthesis.model.oldCommands.mentor.MentorReviewProposalCommand
+import mk.ukim.finki.soa.masterthesis.model.oldCommands.mentor.ReviewThesisDraftCommand
+import mk.ukim.finki.soa.masterthesis.model.oldCommands.mentor.ScheduleThesisDefenseCommand
 import mk.ukim.finki.soa.masterthesis.model.valueObject.*
 import mk.ukim.finki.soa.masterthesis.service.MentorMasterThesisService
 import org.axonframework.commandhandling.gateway.CommandGateway

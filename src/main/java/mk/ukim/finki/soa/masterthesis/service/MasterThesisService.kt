@@ -1,14 +1,14 @@
 package mk.ukim.finki.soa.masterthesis.service
 
-import mk.ukim.finki.soa.masterthesis.model.command.administration.ApproveCompletedThesisCommand
-import mk.ukim.finki.soa.masterthesis.model.command.administration.EvaluateThesisCommand
-import mk.ukim.finki.soa.masterthesis.model.command.mentor.ApproveThesisProposalCommand
-import mk.ukim.finki.soa.masterthesis.model.command.mentor.MentorReviewProposalCommand
-import mk.ukim.finki.soa.masterthesis.model.command.mentor.ReviewThesisDraftCommand
-import mk.ukim.finki.soa.masterthesis.model.command.mentor.ScheduleThesisDefenseCommand
-import mk.ukim.finki.soa.masterthesis.model.command.student.InitiateThesisRegistrationCommand
-import mk.ukim.finki.soa.masterthesis.model.command.student.SubmitThesisDraftCommand
-import mk.ukim.finki.soa.masterthesis.model.command.student.SubmitThesisProposalCommand
+import mk.ukim.finki.soa.masterthesis.model.oldCommands.administration.ApproveCompletedThesisCommand
+import mk.ukim.finki.soa.masterthesis.model.oldCommands.administration.EvaluateThesisCommand
+import mk.ukim.finki.soa.masterthesis.model.oldCommands.mentor.ApproveThesisProposalCommand
+import mk.ukim.finki.soa.masterthesis.model.oldCommands.mentor.MentorReviewProposalCommand
+import mk.ukim.finki.soa.masterthesis.model.oldCommands.mentor.ReviewThesisDraftCommand
+import mk.ukim.finki.soa.masterthesis.model.oldCommands.mentor.ScheduleThesisDefenseCommand
+import mk.ukim.finki.soa.masterthesis.model.oldCommands.student.InitiateThesisRegistrationCommand
+import mk.ukim.finki.soa.masterthesis.model.oldCommands.student.SubmitThesisDraftCommand
+import mk.ukim.finki.soa.masterthesis.model.oldCommands.student.SubmitThesisProposalCommand
 import mk.ukim.finki.soa.masterthesis.model.valueObject.MasterThesisId
 import java.util.concurrent.CompletableFuture
 

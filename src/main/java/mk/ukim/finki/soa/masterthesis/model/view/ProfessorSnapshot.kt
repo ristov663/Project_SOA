@@ -11,5 +11,5 @@ data class ProfessorSnapshot(
     val professorTitle: ProfessorTitle,
     val orderingRank: Int,
     val officeName: String,
-    val eventNumber: Long  // Tracks the last event that led to this snapshot
+    val eventNumber: Long
 )

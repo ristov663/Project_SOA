@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
-import mk.ukim.finki.soa.masterthesis.model.command.mentor.ApproveThesisProposalCommand
-import mk.ukim.finki.soa.masterthesis.model.command.mentor.MentorReviewProposalCommand
-import mk.ukim.finki.soa.masterthesis.model.command.mentor.ReviewThesisDraftCommand
-import mk.ukim.finki.soa.masterthesis.model.command.mentor.ScheduleThesisDefenseCommand
+import mk.ukim.finki.soa.masterthesis.model.oldCommands.mentor.ApproveThesisProposalCommand
+import mk.ukim.finki.soa.masterthesis.model.oldCommands.mentor.MentorReviewProposalCommand
+import mk.ukim.finki.soa.masterthesis.model.oldCommands.mentor.ReviewThesisDraftCommand
+import mk.ukim.finki.soa.masterthesis.model.oldCommands.mentor.ScheduleThesisDefenseCommand
 import mk.ukim.finki.soa.masterthesis.service.MentorMasterThesisService
 import mk.ukim.finki.soa.masterthesis.web.dto.*
 

@@ -1,7 +1,7 @@
 package mk.ukim.finki.soa.masterthesis.service.impl
 
-import mk.ukim.finki.soa.masterthesis.model.command.administration.ApproveCompletedThesisCommand
-import mk.ukim.finki.soa.masterthesis.model.command.administration.EvaluateThesisCommand
+import mk.ukim.finki.soa.masterthesis.model.oldCommands.administration.ApproveCompletedThesisCommand
+import mk.ukim.finki.soa.masterthesis.model.oldCommands.administration.EvaluateThesisCommand
 import mk.ukim.finki.soa.masterthesis.model.valueObject.*
 import mk.ukim.finki.soa.masterthesis.service.AdministrationMasterThesisService
 import org.axonframework.commandhandling.gateway.CommandGateway

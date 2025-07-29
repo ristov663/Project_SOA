@@ -1,8 +1,8 @@
 package mk.ukim.finki.soa.masterthesis.service.impl
 
-import mk.ukim.finki.soa.masterthesis.model.command.student.InitiateThesisRegistrationCommand
-import mk.ukim.finki.soa.masterthesis.model.command.student.SubmitThesisDraftCommand
-import mk.ukim.finki.soa.masterthesis.model.command.student.SubmitThesisProposalCommand
+import mk.ukim.finki.soa.masterthesis.model.oldCommands.student.InitiateThesisRegistrationCommand
+import mk.ukim.finki.soa.masterthesis.model.oldCommands.student.SubmitThesisDraftCommand
+import mk.ukim.finki.soa.masterthesis.model.oldCommands.student.SubmitThesisProposalCommand
 import mk.ukim.finki.soa.masterthesis.model.valueObject.*
 import mk.ukim.finki.soa.masterthesis.service.StudentMasterThesisService
 import org.axonframework.commandhandling.gateway.CommandGateway

@@ -2,7 +2,7 @@ package mk.ukim.finki.soa.masterthesis.repository
 
 import jakarta.persistence.EntityManager
 import jakarta.persistence.PersistenceContext
-import mk.ukim.finki.soa.masterthesis.model.oldAggregate.MasterThesis
+import mk.ukim.finki.soa.masterthesis.model.aggregate.MasterThesis
 import mk.ukim.finki.soa.masterthesis.model.valueObject.MasterThesisId
 import org.axonframework.common.jpa.SimpleEntityManagerProvider
 import org.axonframework.eventhandling.EventBus

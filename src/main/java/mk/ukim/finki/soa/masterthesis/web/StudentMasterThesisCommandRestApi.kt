@@ -7,57 +7,34 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
-import mk.ukim.finki.soa.masterthesis.model.oldCommands.student.InitiateThesisRegistrationCommand
-import mk.ukim.finki.soa.masterthesis.model.oldCommands.student.SubmitThesisDraftCommand
-import mk.ukim.finki.soa.masterthesis.model.oldCommands.student.SubmitThesisProposalCommand
+import mk.ukim.finki.soa.masterthesis.model.command.student.SubmitThesisRegistration
 import mk.ukim.finki.soa.masterthesis.service.StudentMasterThesisService
-import mk.ukim.finki.soa.masterthesis.web.dto.*
-
+import mk.ukim.finki.soa.masterthesis.web.dto.student.SubmitThesisRegistrationDto
 
 @RestController
 @RequestMapping("/student/master-thesis")
-@Tag(name = "Student Master Thesis Command API", description = "Commands by students for master thesis process.")
+@Tag(
+    name = "Student Master Thesis Command API",
+    description = "Commands by students for master thesis process."
+)
 class StudentMasterThesisCommandRestApi(
     private val studentMasterThesisService: StudentMasterThesisService
 ) {
 
-    @Operation(summary = "Initiate registration of master thesis")
-    @PostMapping("/register")
-    fun registerThesis(@RequestBody dto: InitiateThesisRegistrationCommandDto): ResponseEntity<Any> {
-        val command = InitiateThesisRegistrationCommand(
+    @Operation(summary = "Submit thesis registration")
+    @PostMapping("/submit-thesis")
+    fun submitThesisRegistration(@RequestBody dto: SubmitThesisRegistrationDto): ResponseEntity<Any> {
+        val command = SubmitThesisRegistration(
             thesisId = dto.thesisId,
-            timestamp = dto.timestamp,
-            studentIndex = dto.studentIndex
-        )
-        studentMasterThesisService.initiateThesisRegistration(command)
-        return ResponseEntity.ok().build()
-    }
-
-    @Operation(summary = "Submit thesis proposal")
-    @PostMapping("/submit-proposal")
-    fun submitProposal(@RequestBody dto: SubmitThesisProposalCommandDto): ResponseEntity<Any> {
-        val command = SubmitThesisProposalCommand(
-            studentIndex = dto.studentIndex,
+            studentId = dto.studentId,
+            mentorId = dto.mentorId,
             title = dto.title,
-            area = dto.area,
-            description = dto.description
+            shortDescription = dto.shortDescription,
+            requiredDocuments = dto.requiredDocuments,
+            submissionDate = dto.submissionDate
         )
-        studentMasterThesisService.submitThesisProposal(command)
-        return ResponseEntity.ok().build()
-    }
 
-    @Operation(summary = "Submit thesis draft")
-    @PostMapping("/submit-draft")
-    fun submitDraft(@RequestBody dto: SubmitThesisDraftCommandDto): ResponseEntity<Any> {
-        val command = SubmitThesisDraftCommand(
-            thesisId = dto.thesisId,
-            studentIndex = dto.studentIndex,
-            draftDocumentType = dto.draftDocumentType,
-            draftVersion = dto.draftVersion,
-            draftText = dto.draftText,
-            submittedAt = dto.submittedAt,
-        )
-        studentMasterThesisService.submitThesisDraft(command)
+        studentMasterThesisService.submitThesisRegistration(command)
         return ResponseEntity.ok().build()
     }
 }

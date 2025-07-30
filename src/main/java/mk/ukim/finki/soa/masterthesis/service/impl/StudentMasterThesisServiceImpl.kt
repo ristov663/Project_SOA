@@ -1,34 +1,18 @@
 package mk.ukim.finki.soa.masterthesis.service.impl
 
-import mk.ukim.finki.soa.masterthesis.model.oldCommands.student.InitiateThesisRegistrationCommand
-import mk.ukim.finki.soa.masterthesis.model.oldCommands.student.SubmitThesisDraftCommand
-import mk.ukim.finki.soa.masterthesis.model.oldCommands.student.SubmitThesisProposalCommand
-import mk.ukim.finki.soa.masterthesis.model.valueObject.*
+import mk.ukim.finki.soa.masterthesis.model.command.student.SubmitThesisRegistration
+import mk.ukim.finki.soa.masterthesis.model.valueObject.MasterThesisId
 import mk.ukim.finki.soa.masterthesis.service.StudentMasterThesisService
 import org.axonframework.commandhandling.gateway.CommandGateway
 import org.springframework.stereotype.Service
 import java.util.concurrent.CompletableFuture
-
 
 @Service
 class StudentMasterThesisServiceImpl(
     val commandGateway: CommandGateway
 
 ) : StudentMasterThesisService {
+    override fun submitThesisRegistration(command: SubmitThesisRegistration): CompletableFuture<MasterThesisId> =
+        commandGateway.send(command)
 
-    override fun isStudentEligible(studentIndex: String): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override fun initiateThesisRegistration(command: InitiateThesisRegistrationCommand): CompletableFuture<MasterThesisId> {
-        return commandGateway.send(command)
-    }
-
-    override fun submitThesisProposal(command: SubmitThesisProposalCommand): CompletableFuture<MasterThesisId> {
-        return commandGateway.send(command)
-    }
-
-    override fun submitThesisDraft(command: SubmitThesisDraftCommand): CompletableFuture<MasterThesisId> {
-        return commandGateway.send(command)
-    }
 }

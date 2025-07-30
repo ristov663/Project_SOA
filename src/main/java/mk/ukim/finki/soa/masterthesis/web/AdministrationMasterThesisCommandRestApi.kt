@@ -7,43 +7,153 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
-import mk.ukim.finki.soa.masterthesis.model.oldCommands.administration.ApproveCompletedThesisCommand
-import mk.ukim.finki.soa.masterthesis.model.oldCommands.administration.EvaluateThesisCommand
+import mk.ukim.finki.soa.masterthesis.model.command.administration.ArchiveThesis
+import mk.ukim.finki.soa.masterthesis.model.command.administration.SecondaryValidateByTeachingAndResearchCommission
+import mk.ukim.finki.soa.masterthesis.model.command.administration.ValidateFourthSecretaryPhase
+import mk.ukim.finki.soa.masterthesis.model.command.administration.ValidateSecondSecretaryPhase
+import mk.ukim.finki.soa.masterthesis.model.command.administration.ValidateThesisByAdministration
+import mk.ukim.finki.soa.masterthesis.model.command.administration.ValidateThesisByCommission
+import mk.ukim.finki.soa.masterthesis.model.command.administration.ValidateThesisBySecretary
+import mk.ukim.finki.soa.masterthesis.model.command.administration.ValidateThirdSecretaryPhase
 import mk.ukim.finki.soa.masterthesis.service.AdministrationMasterThesisService
-import mk.ukim.finki.soa.masterthesis.web.dto.*
+import mk.ukim.finki.soa.masterthesis.web.dto.administration.ArchiveThesisDto
+import mk.ukim.finki.soa.masterthesis.web.dto.administration.SecondaryValidateByTeachingAndResearchCommissionDto
+import mk.ukim.finki.soa.masterthesis.web.dto.administration.ValidateFourthSecretaryPhaseDto
+import mk.ukim.finki.soa.masterthesis.web.dto.administration.ValidateSecondSecretaryPhaseDto
+import mk.ukim.finki.soa.masterthesis.web.dto.administration.ValidateThesisByAdministrationDto
+import mk.ukim.finki.soa.masterthesis.web.dto.administration.ValidateThesisByCommissionDto
+import mk.ukim.finki.soa.masterthesis.web.dto.administration.ValidateThesisBySecretaryDto
+import mk.ukim.finki.soa.masterthesis.web.dto.administration.ValidateThirdSecretaryPhaseDto
 
 
 @RestController
-@RequestMapping("/admin/master-thesis")
-@Tag(name = "Administration Master Thesis Command API", description = "Commands by administrative staff.")
+@RequestMapping("/administration/master-thesis")
+@Tag(
+    name = "Administration Master Thesis Command API",
+    description = "Commands by administrative staff."
+)
 class AdministrationMasterThesisCommandRestApi(
     private val administrationMasterThesisService: AdministrationMasterThesisService,
 ) {
 
-    @Operation(summary = "Approve completed thesis")
-    @PostMapping("/approve-completed-thesis")
-    fun approveCompletedThesis(@RequestBody dto: ApproveCompletedThesisCommand): ResponseEntity<Any> {
-        val command = ApproveCompletedThesisCommand(
+    @Operation(summary = "Archive thesis")
+    @PostMapping("/archive-thesis")
+    fun archiveThesis(@RequestBody dto: ArchiveThesisDto): ResponseEntity<Any> {
+        val command = ArchiveThesis(
             thesisId = dto.thesisId,
-            approveId = dto.approveId,
-            finalGrade = dto.finalGrade,
-            timestamp = dto.timestamp
+            administratorId = dto.administratorId,
+            processValidated = dto.processValidated,
+            remarks = dto.remarks,
+            archiveDate = dto.archiveDate
         )
-        administrationMasterThesisService.approveCompletedThesis(command)
+
+        administrationMasterThesisService.archiveThesis(command)
         return ResponseEntity.ok().build()
     }
 
-    @Operation(summary = "Mentor schedule thesis defense")
-    @PostMapping("/schedule-defense")
-    fun evaluateThesis(@RequestBody dto: EvaluateThesisCommandDto): ResponseEntity<Any> {
-        val command = EvaluateThesisCommand(
+    @Operation(summary = "Secondary validate by teaching and research commission")
+    @PostMapping("/secondary-validate-by-teaching-commission")
+    fun secondaryValidateByTeachingAndSearchingCommission(@RequestBody dto: SecondaryValidateByTeachingAndResearchCommissionDto): ResponseEntity<Any> {
+        val command = SecondaryValidateByTeachingAndResearchCommission(
             thesisId = dto.thesisId,
-            committeeId = dto.committeeId,
-            evaluation = dto.evaluation,
-            isApproved = dto.isApproved,
-            timestamp = dto.timestamp
+            commissionCoordinatorId = dto.commissionCoordinatorId,
+            approved = dto.approved,
+            remarks = dto.remarks,
+            validationDate = dto.validationDate
         )
-        administrationMasterThesisService.evaluateThesis(command)
+        administrationMasterThesisService.secondaryValidateByTeachingAndResearchCommission(command)
+        return ResponseEntity.ok().build()
+    }
+
+    @Operation(summary = "Validate thesis by administration")
+    @PostMapping("/validate-by-administration")
+    fun validateThesisByAdministration(@RequestBody dto: ValidateThesisByAdministrationDto): ResponseEntity<Any> {
+        val command = ValidateThesisByAdministration(
+            thesisId = dto.thesisId,
+            administratorId = dto.administratorId,
+            approved = dto.approved,
+            remarks = dto.remarks,
+            documentsVerified = dto.documentsVerified,
+            studentEligibilityConfirmed = dto.studentEligibilityConfirmed,
+            validationDate = dto.validationDate
+        )
+
+        administrationMasterThesisService.validateThesisByAdministration(command)
+        return ResponseEntity.ok().build()
+    }
+
+    @Operation(summary = "Validate thesis by commission")
+    @PostMapping("/validate-by-commission")
+    fun validateThesisByCommission(@RequestBody dto: ValidateThesisByCommissionDto): ResponseEntity<Any> {
+        val command = ValidateThesisByCommission(
+            thesisId = dto.thesisId,
+            commissionCoordinatorId = dto.commissionCoordinatorId,
+            approved = dto.approved,
+            remarks = dto.remarks,
+            validationDate = dto.validationDate
+        )
+
+        administrationMasterThesisService.validateThesisByCommission(command)
+        return ResponseEntity.ok().build()
+    }
+
+    @Operation(summary = "Validate thesis by secretary")
+    @PostMapping("/validate-by-secretary")
+    fun validateThesisBySecretary(@RequestBody dto: ValidateThesisBySecretaryDto): ResponseEntity<Any> {
+        val command = ValidateThesisBySecretary(
+            thesisId = dto.thesisId,
+            secretaryId = dto.secretaryId,
+            archiveNumber = dto.archiveNumber,
+            remarks = dto.remarks,
+            validationDate = dto.validationDate
+        )
+
+        administrationMasterThesisService.validateThesisBySecretary(command)
+        return ResponseEntity.ok().build()
+    }
+
+    @Operation(summary = "Validate second secretary phase")
+    @PostMapping("/validate-second-secretary-phase")
+    fun validateSecondSecretaryPhase(@RequestBody dto: ValidateSecondSecretaryPhaseDto): ResponseEntity<Any> {
+        val command = ValidateSecondSecretaryPhase(
+            thesisId = dto.thesisId,
+            secretaryId = dto.secretaryId,
+            commissionArchiveNumber = dto.commissionArchiveNumber,
+            remarks = dto.remarks,
+            validationDate = dto.validationDate
+        )
+
+        administrationMasterThesisService.validateSecondSecretaryPhase(command)
+        return ResponseEntity.ok().build()
+    }
+
+    @Operation(summary = "Validate third secretary phase")
+    @PostMapping("/validate-third-secretary-phase")
+    fun validateThirdSecretaryPhase(@RequestBody dto: ValidateThirdSecretaryPhaseDto): ResponseEntity<Any> {
+        val command = ValidateThirdSecretaryPhase(
+            thesisId = dto.thesisId,
+            secretaryId = dto.secretaryId,
+            archiveNumber = dto.archiveNumber,
+            remarks = dto.remarks,
+            validationDate = dto.validationDate
+        )
+
+        administrationMasterThesisService.validateThirdSecretaryPhase(command)
+        return ResponseEntity.ok().build()
+    }
+
+    @Operation(summary = "Validate fourth secretary phase")
+    @PostMapping("/validate-fourth-secretary-phase")
+    fun validateFourthSecretaryPhase(@RequestBody dto: ValidateFourthSecretaryPhaseDto): ResponseEntity<Any> {
+        val command = ValidateFourthSecretaryPhase(
+            thesisId = dto.thesisId,
+            secretaryId = dto.secretaryId,
+            archiveNumber = dto.archiveNumber,
+            remarks = dto.remarks,
+            validationDate = dto.validationDate
+        )
+
+        administrationMasterThesisService.validateFourthSecretaryPhase(command)
         return ResponseEntity.ok().build()
     }
 }

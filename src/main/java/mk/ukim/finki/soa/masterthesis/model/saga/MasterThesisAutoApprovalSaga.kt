@@ -1,8 +1,16 @@
 package mk.ukim.finki.soa.masterthesis.model.saga
 
-import mk.ukim.finki.soa.masterthesis.model.command.AutoApproveCommissionValidation
-import mk.ukim.finki.soa.masterthesis.model.command.AutoApproveSecondCommissionValidation
+import mk.ukim.finki.soa.masterthesis.model.command.system.AutoApproveCommissionValidation
+import mk.ukim.finki.soa.masterthesis.model.command.system.AutoApproveSecondCommissionValidation
 import mk.ukim.finki.soa.masterthesis.model.event.*
+import mk.ukim.finki.soa.masterthesis.model.event.administration.SecondSecretaryValidationCompleted
+import mk.ukim.finki.soa.masterthesis.model.event.administration.SecondaryValidatedByTeachingAndResearchCommission
+import mk.ukim.finki.soa.masterthesis.model.event.administration.ThesisValidatedByAdministration
+import mk.ukim.finki.soa.masterthesis.model.event.administration.ThesisValidatedByCommission
+import mk.ukim.finki.soa.masterthesis.model.event.mentor.ThesisMarkedAsDefended
+import mk.ukim.finki.soa.masterthesis.model.event.mentor.ThesisValidatedByMentor
+import mk.ukim.finki.soa.masterthesis.model.event.system.CommissionValidationAutoApproved
+import mk.ukim.finki.soa.masterthesis.model.event.system.SecondCommissionValidationAutoApproved
 import mk.ukim.finki.soa.masterthesis.model.valueObject.MasterThesisId
 import org.axonframework.commandhandling.gateway.CommandGateway
 import org.axonframework.deadline.DeadlineManager

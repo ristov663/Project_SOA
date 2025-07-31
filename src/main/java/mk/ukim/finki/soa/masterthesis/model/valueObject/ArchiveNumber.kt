@@ -1,10 +1,13 @@
 package mk.ukim.finki.soa.masterthesis.model.valueObject
 
 import jakarta.persistence.Embeddable
+import java.time.LocalDateTime
 
 @Embeddable
-data class ArchiveNumber(val value: String) {
-
+data class ArchiveNumber(
+    val value: String,
+    val archiveDate: LocalDateTime? = null
+) {
     protected constructor() : this("")
 
     init {
@@ -20,10 +23,12 @@ data class ArchiveNumber(val value: String) {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
         other as ArchiveNumber
-        return value == other.value
+        return value == other.value && archiveDate == other.archiveDate
     }
 
     override fun hashCode(): Int {
-        return value.hashCode()
+        var result = value.hashCode()
+        result = 31 * result + (archiveDate?.hashCode() ?: 0)
+        return result
     }
 }

@@ -1,9 +1,10 @@
 package mk.ukim.finki.soa.masterthesis.model.valueObject
 
+import jakarta.persistence.Column
 import jakarta.persistence.Embeddable
 
 @Embeddable
-data class MasterThesisTitle(val value: String) {
+data class MasterThesisTitle(@Column(name = "title") val value: String) {
 
     protected constructor() : this("")
 

@@ -2,7 +2,6 @@ package mk.ukim.finki.soa.masterthesis.model.valueObject
 
 import jakarta.persistence.Embeddable
 import mk.ukim.finki.soa.masterthesis.model.common.Identifier
-import mk.ukim.finki.soa.masterthesis.model.view.ProfessorSnapshot
 import java.util.*
 
 @Embeddable

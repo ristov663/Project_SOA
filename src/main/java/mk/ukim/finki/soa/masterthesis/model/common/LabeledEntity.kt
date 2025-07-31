@@ -9,7 +9,7 @@ interface LabeledEntity {
     fun getId(): Identifier<out Any>
 
     @JsonProperty("label")
-    fun getLabel(): String
+    fun getLabel(): String? = null
 
     @JsonProperty("entityType")
     fun getEntityType(): String = this.javaClass.simpleName

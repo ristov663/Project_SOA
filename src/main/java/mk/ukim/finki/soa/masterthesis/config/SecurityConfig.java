@@ -30,9 +30,18 @@ public class SecurityConfig {
     public SecurityFilterChain filterChainDev(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/actuator/**").permitAll()
+                        .requestMatchers(
+                                "/actuator/**",
+                                "/swagger-ui.html",          // legacy path, still used by some versions
+                                "/swagger-ui/**",           // all UI assets (JS, CSS, etc.)
+                                "/v3/api-docs/**",          // OpenAPI JSON
+                                "/swagger-resources/**",    // required by some Swagger setups
+                                "/webjars/**",              // static assets
+                                "/h2/**"                    // if you want H2 console open
+                        ).permitAll()
                         .anyRequest().permitAll()
-                );
+                )
+                .csrf(csrf -> csrf.disable());      // (optional, common for dev/testing)
         return http.build();
     }
 }

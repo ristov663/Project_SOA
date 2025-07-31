@@ -1,4 +1,4 @@
-package mk.ukim.finki.soa.masterthesis.model.view
+package mk.ukim.finki.soa.masterthesis.model.oldView
 
 import mk.ukim.finki.soa.masterthesis.model.valueObject.Email
 import mk.ukim.finki.soa.masterthesis.model.valueObject.StudentId

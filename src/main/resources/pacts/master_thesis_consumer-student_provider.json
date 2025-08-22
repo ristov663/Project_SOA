@@ -27,7 +27,8 @@
           "enrollment": {
             "program": "Software engineering and information systems",
             "year": 4
-          }
+          },
+          "validated": true
         }
       },
       "providerStates": [

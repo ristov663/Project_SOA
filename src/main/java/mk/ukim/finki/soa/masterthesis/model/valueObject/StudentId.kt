@@ -1,12 +1,12 @@
 package mk.ukim.finki.soa.masterthesis.model.valueObject
 
 import jakarta.persistence.Embeddable
+import mk.ukim.finki.soa.masterthesis.model.aggregate.MasterThesis
 import mk.ukim.finki.soa.masterthesis.model.common.Identifier
-import mk.ukim.finki.soa.masterthesis.model.oldView.StudentSnapshot
 import java.util.*
 
 @Embeddable
-class StudentId(value: String) : Identifier<StudentSnapshot>(value, StudentSnapshot::class.java) {
+class StudentId(value: String) : Identifier<MasterThesis>(value, MasterThesis::class.java) {
     constructor() : this(UUID.randomUUID().toString())
 
     override fun equals(other: Any?): Boolean {

@@ -33,7 +33,8 @@ class MentorMasterThesisCommandRestApi(
     private val mentorMasterThesisService: MentorMasterThesisService
 ) {
 
-    @Operation(summary = "Mark thesis as defended")
+    @Operation(summary = "Mark thesis as defended",
+        security = [io.swagger.v3.oas.annotations.security.SecurityRequirement(name = "bearerAuth")])
     @PostMapping("/mark-thesis")
     fun markThesisAsDefended(@RequestBody dto: MarkThesisAsDefendedDto): ResponseEntity<Any> {
         val command = MarkThesisAsDefended(
@@ -47,7 +48,8 @@ class MentorMasterThesisCommandRestApi(
         return ResponseEntity.ok().build()
     }
 
-    @Operation(summary = "Schedule thesis defense")
+    @Operation(summary = "Schedule thesis defense",
+        security = [io.swagger.v3.oas.annotations.security.SecurityRequirement(name = "bearerAuth")])
     @PostMapping("/schedule-defense")
     fun scheduleThesisDefense(@RequestBody dto: ScheduleThesisDefenseDto): ResponseEntity<Any> {
         val command = ScheduleThesisDefense(
@@ -62,7 +64,8 @@ class MentorMasterThesisCommandRestApi(
         return ResponseEntity.ok().build()
     }
 
-    @Operation(summary = "Select commission members")
+    @Operation(summary = "Select commission members",
+        security = [io.swagger.v3.oas.annotations.security.SecurityRequirement(name = "bearerAuth")])
     @PostMapping("/select-commission-members")
     fun selectCommissionMembers(@RequestBody dto: SelectCommissionMembersDto): ResponseEntity<Any> {
         val command = SelectCommissionMembers(
@@ -77,7 +80,8 @@ class MentorMasterThesisCommandRestApi(
         return ResponseEntity.ok().build()
     }
 
-    @Operation(summary = "Submit commission report")
+    @Operation(summary = "Submit commission report",
+        security = [io.swagger.v3.oas.annotations.security.SecurityRequirement(name = "bearerAuth")])
     @PostMapping("/submit-commission-report")
     fun submitCommissionReport(@RequestBody dto: SubmitCommissionReportDto): ResponseEntity<Any> {
         val command = SubmitCommissionReport(
@@ -93,7 +97,8 @@ class MentorMasterThesisCommandRestApi(
         return ResponseEntity.ok().build()
     }
 
-    @Operation(summary = "Upload revised thesis draft")
+    @Operation(summary = "Upload revised thesis draft",
+        security = [io.swagger.v3.oas.annotations.security.SecurityRequirement(name = "bearerAuth")])
     @PostMapping("/upload-revised-thesis")
     fun uploadRevisedThesisDraft(@RequestBody dto: UploadRevisedThesisDraftDto): ResponseEntity<Any> {
         val command = UploadRevisedThesisDraft(
@@ -107,7 +112,8 @@ class MentorMasterThesisCommandRestApi(
         return ResponseEntity.ok().build()
     }
 
-    @Operation(summary = "Upload thesis draft")
+    @Operation(summary = "Upload thesis draft",
+        security = [io.swagger.v3.oas.annotations.security.SecurityRequirement(name = "bearerAuth")])
     @PostMapping("/upload-thesis")
     fun uploadThesisDraft(@RequestBody dto: UploadThesisDraftDto): ResponseEntity<Any> {
         val command = UploadThesisDraft(
@@ -121,7 +127,8 @@ class MentorMasterThesisCommandRestApi(
         return ResponseEntity.ok().build()
     }
 
-    @Operation(summary = "Validate thesis by mentor")
+    @Operation(summary = "Validate thesis by mentor",
+        security = [io.swagger.v3.oas.annotations.security.SecurityRequirement(name = "bearerAuth")])
     @PostMapping("/validate-by-mentor")
     fun submitCommissionReport(@RequestBody dto: ValidateThesisByMentorDto): ResponseEntity<Any> {
         val command = ValidateThesisByMentor(

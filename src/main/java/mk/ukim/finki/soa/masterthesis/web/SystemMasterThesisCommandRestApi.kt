@@ -21,7 +21,8 @@ class SystemMasterThesisCommandRestApi(
     private val systemMasterThesisService: SystemMasterThesisService
 ) {
 
-    @Operation(summary = "Auto approve commission validation")
+    @Operation(summary = "Auto approve commission validation",
+        security = [io.swagger.v3.oas.annotations.security.SecurityRequirement(name = "bearerAuth")])
     @PostMapping("/approve-commission")
     fun approveCommissionValidation(@RequestBody dto: AutoApproveCommissionValidation): ResponseEntity<Any> {
         val command = AutoApproveCommissionValidation(
@@ -34,7 +35,8 @@ class SystemMasterThesisCommandRestApi(
         return ResponseEntity.ok().build()
     }
 
-    @Operation(summary = "Auto approve second commission validation")
+    @Operation(summary = "Auto approve second commission validation",
+        security = [io.swagger.v3.oas.annotations.security.SecurityRequirement(name = "bearerAuth")])
     @PostMapping("/approve-second-commission")
     fun approveSecondCommissionValidation(@RequestBody dto: AutoApproveSecondCommissionValidation): ResponseEntity<Any> {
         val command = AutoApproveSecondCommissionValidation(

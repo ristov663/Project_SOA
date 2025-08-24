@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 import mk.ukim.finki.soa.masterthesis.model.command.student.SubmitThesisRegistration
 import mk.ukim.finki.soa.masterthesis.service.StudentMasterThesisService
 import mk.ukim.finki.soa.masterthesis.web.dto.student.SubmitThesisRegistrationDto
+import org.springframework.security.access.prepost.PreAuthorize
 
 @RestController
 @RequestMapping("/student/master-thesis")
@@ -21,7 +22,8 @@ class StudentMasterThesisCommandRestApi(
     private val studentMasterThesisService: StudentMasterThesisService
 ) {
 
-    @Operation(summary = "Submit thesis registration")
+    @Operation(summary = "Submit thesis registration",
+        security = [io.swagger.v3.oas.annotations.security.SecurityRequirement(name = "bearerAuth")])
     @PostMapping("/submit-thesis")
     fun submitThesisRegistration(@RequestBody dto: SubmitThesisRegistrationDto): ResponseEntity<Any> {
         val command = SubmitThesisRegistration(

@@ -36,7 +36,8 @@ class AdministrationMasterThesisCommandRestApi(
     private val administrationMasterThesisService: AdministrationMasterThesisService,
 ) {
 
-    @Operation(summary = "Archive thesis")
+    @Operation(summary = "Archive thesis",
+        security = [io.swagger.v3.oas.annotations.security.SecurityRequirement(name = "bearerAuth")])
     @PostMapping("/archive-thesis")
     fun archiveThesis(@RequestBody dto: ArchiveThesisDto): ResponseEntity<Any> {
         val command = ArchiveThesis(
@@ -51,7 +52,8 @@ class AdministrationMasterThesisCommandRestApi(
         return ResponseEntity.ok().build()
     }
 
-    @Operation(summary = "Secondary validate by teaching and research commission")
+    @Operation(summary = "Secondary validate by teaching and research commission",
+        security = [io.swagger.v3.oas.annotations.security.SecurityRequirement(name = "bearerAuth")])
     @PostMapping("/secondary-validate-by-teaching-commission")
     fun secondaryValidateByTeachingAndSearchingCommission(@RequestBody dto: SecondaryValidateByTeachingAndResearchCommissionDto): ResponseEntity<Any> {
         val command = SecondaryValidateByTeachingAndResearchCommission(
@@ -65,7 +67,8 @@ class AdministrationMasterThesisCommandRestApi(
         return ResponseEntity.ok().build()
     }
 
-    @Operation(summary = "Validate thesis by administration")
+    @Operation(summary = "Validate thesis by administration",
+        security = [io.swagger.v3.oas.annotations.security.SecurityRequirement(name = "bearerAuth")])
     @PostMapping("/validate-by-administration")
     fun validateThesisByAdministration(@RequestBody dto: ValidateThesisByAdministrationDto): ResponseEntity<Any> {
         val command = ValidateThesisByAdministration(
@@ -82,7 +85,8 @@ class AdministrationMasterThesisCommandRestApi(
         return ResponseEntity.ok().build()
     }
 
-    @Operation(summary = "Validate thesis by commission")
+    @Operation(summary = "Validate thesis by commission",
+        security = [io.swagger.v3.oas.annotations.security.SecurityRequirement(name = "bearerAuth")])
     @PostMapping("/validate-by-commission")
     fun validateThesisByCommission(@RequestBody dto: ValidateThesisByCommissionDto): ResponseEntity<Any> {
         val command = ValidateThesisByCommission(
@@ -97,7 +101,8 @@ class AdministrationMasterThesisCommandRestApi(
         return ResponseEntity.ok().build()
     }
 
-    @Operation(summary = "Validate thesis by secretary")
+    @Operation(summary = "Validate thesis by secretary",
+        security = [io.swagger.v3.oas.annotations.security.SecurityRequirement(name = "bearerAuth")])
     @PostMapping("/validate-by-secretary")
     fun validateThesisBySecretary(@RequestBody dto: ValidateThesisBySecretaryDto): ResponseEntity<Any> {
         val command = ValidateThesisBySecretary(
@@ -112,7 +117,8 @@ class AdministrationMasterThesisCommandRestApi(
         return ResponseEntity.ok().build()
     }
 
-    @Operation(summary = "Validate second secretary phase")
+    @Operation(summary = "Validate second secretary phase",
+        security = [io.swagger.v3.oas.annotations.security.SecurityRequirement(name = "bearerAuth")])
     @PostMapping("/validate-second-secretary-phase")
     fun validateSecondSecretaryPhase(@RequestBody dto: ValidateSecondSecretaryPhaseDto): ResponseEntity<Any> {
         val command = ValidateSecondSecretaryPhase(
@@ -127,7 +133,8 @@ class AdministrationMasterThesisCommandRestApi(
         return ResponseEntity.ok().build()
     }
 
-    @Operation(summary = "Validate third secretary phase")
+    @Operation(summary = "Validate third secretary phase",
+        security = [io.swagger.v3.oas.annotations.security.SecurityRequirement(name = "bearerAuth")])
     @PostMapping("/validate-third-secretary-phase")
     fun validateThirdSecretaryPhase(@RequestBody dto: ValidateThirdSecretaryPhaseDto): ResponseEntity<Any> {
         val command = ValidateThirdSecretaryPhase(
@@ -142,7 +149,8 @@ class AdministrationMasterThesisCommandRestApi(
         return ResponseEntity.ok().build()
     }
 
-    @Operation(summary = "Validate fourth secretary phase")
+    @Operation(summary = "Validate fourth secretary phase",
+        security = [io.swagger.v3.oas.annotations.security.SecurityRequirement(name = "bearerAuth")])
     @PostMapping("/validate-fourth-secretary-phase")
     fun validateFourthSecretaryPhase(@RequestBody dto: ValidateFourthSecretaryPhaseDto): ResponseEntity<Any> {
         val command = ValidateFourthSecretaryPhase(

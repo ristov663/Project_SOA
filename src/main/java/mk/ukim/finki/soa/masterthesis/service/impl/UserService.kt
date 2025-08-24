@@ -2,6 +2,7 @@ package mk.ukim.finki.soa.masterthesis.service.impl
 
 import mk.ukim.finki.soa.masterthesis.config.jwt.JwtUtil
 import mk.ukim.finki.soa.masterthesis.model.entity.User
+import mk.ukim.finki.soa.masterthesis.model.valueObject.AppRole
 import mk.ukim.finki.soa.masterthesis.repository.UserRepository
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
@@ -13,14 +14,18 @@ class UserService(
 ) {
     private val passwordEncoder = BCryptPasswordEncoder()
 
-    fun register(email: String, username: String, password: String): String {
+    fun register(email: String, username: String, password: String, role: AppRole = AppRole.GUEST): String {
         if (userRepository.findByEmail(email).isPresent) throw IllegalArgumentException("Email taken")
         if (userRepository.findByUsername(username).isPresent) throw IllegalArgumentException("Username taken")
 
+        if (!AppRole.values().contains(role)) throw IllegalArgumentException("Invalid role")
+
         val hashed = passwordEncoder.encode(password)
-        val user = userRepository.save(User(username = username, email = email, password = hashed))
+        val user = userRepository.save(User(username = username, email = email, password = hashed, role = role))
         return jwtUtil.generateToken(user)
     }
+
+
 
     fun login(usernameOrEmail: String, password: String): String {
         val user = userRepository.findByUsername(usernameOrEmail)

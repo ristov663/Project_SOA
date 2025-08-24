@@ -22,6 +22,7 @@ import mk.ukim.finki.soa.masterthesis.web.dto.mentor.SubmitCommissionReportDto
 import mk.ukim.finki.soa.masterthesis.web.dto.mentor.UploadRevisedThesisDraftDto
 import mk.ukim.finki.soa.masterthesis.web.dto.mentor.UploadThesisDraftDto
 import mk.ukim.finki.soa.masterthesis.web.dto.mentor.ValidateThesisByMentorDto
+import org.springframework.security.access.prepost.PreAuthorize
 
 @RestController
 @RequestMapping("/mentor/master-thesis")
@@ -29,6 +30,7 @@ import mk.ukim.finki.soa.masterthesis.web.dto.mentor.ValidateThesisByMentorDto
     name = "Mentor Master Thesis Command API",
     description = "Commands by mentors for master thesis process."
 )
+@PreAuthorize("hasRole('PROFESSOR') or hasRole('ADMIN') or hasRole('DEAN')")
 class MentorMasterThesisCommandRestApi(
     private val mentorMasterThesisService: MentorMasterThesisService
 ) {

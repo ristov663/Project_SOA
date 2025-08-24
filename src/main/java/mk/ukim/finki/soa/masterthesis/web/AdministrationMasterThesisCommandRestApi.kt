@@ -24,13 +24,14 @@ import mk.ukim.finki.soa.masterthesis.web.dto.administration.ValidateThesisByAdm
 import mk.ukim.finki.soa.masterthesis.web.dto.administration.ValidateThesisByCommissionDto
 import mk.ukim.finki.soa.masterthesis.web.dto.administration.ValidateThesisBySecretaryDto
 import mk.ukim.finki.soa.masterthesis.web.dto.administration.ValidateThirdSecretaryPhaseDto
+import org.springframework.security.access.prepost.PreAuthorize
 
 
 @RestController
 @RequestMapping("/administration/master-thesis")
 @Tag(
     name = "Administration Master Thesis Command API",
-    description = "Commands by administrative staff."
+    description = "Commands by administrative staff.",
 )
 class AdministrationMasterThesisCommandRestApi(
     private val administrationMasterThesisService: AdministrationMasterThesisService,
@@ -39,6 +40,7 @@ class AdministrationMasterThesisCommandRestApi(
     @Operation(summary = "Archive thesis",
         security = [io.swagger.v3.oas.annotations.security.SecurityRequirement(name = "bearerAuth")])
     @PostMapping("/archive-thesis")
+    @PreAuthorize("hasRole('ARCHIVE_ADMINISTRATION') or hasRole('ADMIN') or hasRole('STUDENT_ADMINISTRATION')")
     fun archiveThesis(@RequestBody dto: ArchiveThesisDto): ResponseEntity<Any> {
         val command = ArchiveThesis(
             thesisId = dto.thesisId,
@@ -55,6 +57,7 @@ class AdministrationMasterThesisCommandRestApi(
     @Operation(summary = "Secondary validate by teaching and research commission",
         security = [io.swagger.v3.oas.annotations.security.SecurityRequirement(name = "bearerAuth")])
     @PostMapping("/secondary-validate-by-teaching-commission")
+    @PreAuthorize("hasRole('SCIENCE_AND_COOPERATION_VICE_DEAN') or hasRole('ADMIN') or hasRole('STUDENT_ADMINISTRATION')")
     fun secondaryValidateByTeachingAndSearchingCommission(@RequestBody dto: SecondaryValidateByTeachingAndResearchCommissionDto): ResponseEntity<Any> {
         val command = SecondaryValidateByTeachingAndResearchCommission(
             thesisId = dto.thesisId,
@@ -70,6 +73,7 @@ class AdministrationMasterThesisCommandRestApi(
     @Operation(summary = "Validate thesis by administration",
         security = [io.swagger.v3.oas.annotations.security.SecurityRequirement(name = "bearerAuth")])
     @PostMapping("/validate-by-administration")
+    @PreAuthorize("hasRole('LEGAL_ADMINISTRATION)') or hasRole('ADMIN') or hasRole('STUDENT_ADMINISTRATION')")
     fun validateThesisByAdministration(@RequestBody dto: ValidateThesisByAdministrationDto): ResponseEntity<Any> {
         val command = ValidateThesisByAdministration(
             thesisId = dto.thesisId,
@@ -88,6 +92,7 @@ class AdministrationMasterThesisCommandRestApi(
     @Operation(summary = "Validate thesis by commission",
         security = [io.swagger.v3.oas.annotations.security.SecurityRequirement(name = "bearerAuth")])
     @PostMapping("/validate-by-commission")
+    @PreAuthorize("hasRole('SCIENCE_AND_COOPERATION_VICE_DEAN') or hasRole('ADMIN') or hasRole('STUDENT_ADMINISTRATION')")
     fun validateThesisByCommission(@RequestBody dto: ValidateThesisByCommissionDto): ResponseEntity<Any> {
         val command = ValidateThesisByCommission(
             thesisId = dto.thesisId,
@@ -104,6 +109,7 @@ class AdministrationMasterThesisCommandRestApi(
     @Operation(summary = "Validate thesis by secretary",
         security = [io.swagger.v3.oas.annotations.security.SecurityRequirement(name = "bearerAuth")])
     @PostMapping("/validate-by-secretary")
+    @PreAuthorize("hasRole('ROLEARCHIVE_ADMINISTRATION') or hasRole('ADMIN') or hasRole('STUDENT_ADMINISTRATION')")
     fun validateThesisBySecretary(@RequestBody dto: ValidateThesisBySecretaryDto): ResponseEntity<Any> {
         val command = ValidateThesisBySecretary(
             thesisId = dto.thesisId,
@@ -120,6 +126,7 @@ class AdministrationMasterThesisCommandRestApi(
     @Operation(summary = "Validate second secretary phase",
         security = [io.swagger.v3.oas.annotations.security.SecurityRequirement(name = "bearerAuth")])
     @PostMapping("/validate-second-secretary-phase")
+    @PreAuthorize("hasRole('ROLEARCHIVE_ADMINISTRATION') or hasRole('ADMIN') or hasRole('STUDENT_ADMINISTRATION')")
     fun validateSecondSecretaryPhase(@RequestBody dto: ValidateSecondSecretaryPhaseDto): ResponseEntity<Any> {
         val command = ValidateSecondSecretaryPhase(
             thesisId = dto.thesisId,
@@ -136,6 +143,7 @@ class AdministrationMasterThesisCommandRestApi(
     @Operation(summary = "Validate third secretary phase",
         security = [io.swagger.v3.oas.annotations.security.SecurityRequirement(name = "bearerAuth")])
     @PostMapping("/validate-third-secretary-phase")
+    @PreAuthorize("hasRole('ROLEARCHIVE_ADMINISTRATION') or hasRole('ADMIN') or hasRole('STUDENT_ADMINISTRATION')")
     fun validateThirdSecretaryPhase(@RequestBody dto: ValidateThirdSecretaryPhaseDto): ResponseEntity<Any> {
         val command = ValidateThirdSecretaryPhase(
             thesisId = dto.thesisId,
@@ -152,6 +160,7 @@ class AdministrationMasterThesisCommandRestApi(
     @Operation(summary = "Validate fourth secretary phase",
         security = [io.swagger.v3.oas.annotations.security.SecurityRequirement(name = "bearerAuth")])
     @PostMapping("/validate-fourth-secretary-phase")
+    @PreAuthorize("hasRole('ROLEARCHIVE_ADMINISTRATION') or hasRole('ADMIN') or hasRole('STUDENT_ADMINISTRATION')")
     fun validateFourthSecretaryPhase(@RequestBody dto: ValidateFourthSecretaryPhaseDto): ResponseEntity<Any> {
         val command = ValidateFourthSecretaryPhase(
             thesisId = dto.thesisId,

@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 import mk.ukim.finki.soa.masterthesis.model.command.system.AutoApproveCommissionValidation
 import mk.ukim.finki.soa.masterthesis.model.command.system.AutoApproveSecondCommissionValidation
 import mk.ukim.finki.soa.masterthesis.service.SystemMasterThesisService
+import org.springframework.security.access.prepost.PreAuthorize
 
 @RestController
 @RequestMapping("/system/master-thesis")
@@ -17,6 +18,7 @@ import mk.ukim.finki.soa.masterthesis.service.SystemMasterThesisService
     name = "System Master Thesis Command API",
     description = "Commands by system for master thesis process."
 )
+@PreAuthorize("hasRole('ADMIN') or hasRole('DEAN') or hasRole('ADMINISTRATION')")
 class SystemMasterThesisCommandRestApi(
     private val systemMasterThesisService: SystemMasterThesisService
 ) {

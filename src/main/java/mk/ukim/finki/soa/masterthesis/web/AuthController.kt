@@ -1,5 +1,7 @@
 package mk.ukim.finki.soa.masterthesis.web
 
+import jakarta.validation.Valid
+import mk.ukim.finki.soa.masterthesis.model.valueObject.AppRole
 import mk.ukim.finki.soa.masterthesis.service.impl.UserService
 import mk.ukim.finki.soa.masterthesis.web.dto.AuthResponse
 import mk.ukim.finki.soa.masterthesis.web.dto.LoginRequest
@@ -14,8 +16,8 @@ class AuthController(
 ) {
 
     @PostMapping("/register")
-    fun register(@RequestBody req: RegisterRequest): ResponseEntity<String> {
-        userService.register(req.email, req.username, req.password) // не враќаме токен
+    fun register(@Valid @RequestBody req: RegisterRequest): ResponseEntity<String> {
+        userService.register(req.email, req.username, req.password, req.role ?: AppRole.GUEST)
         return ResponseEntity.ok("Registration successful")
     }
 

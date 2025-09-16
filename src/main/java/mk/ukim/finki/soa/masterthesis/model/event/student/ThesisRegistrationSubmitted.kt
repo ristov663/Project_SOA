@@ -1,5 +1,6 @@
 package mk.ukim.finki.soa.masterthesis.model.event.student
 
+import mk.ukim.finki.soa.masterthesis.model.event.AbstractEvent
 import mk.ukim.finki.soa.masterthesis.model.valueObject.DocumentInfo
 import mk.ukim.finki.soa.masterthesis.model.valueObject.MasterThesisDescription
 import mk.ukim.finki.soa.masterthesis.model.valueObject.MasterThesisId
@@ -18,4 +19,8 @@ data class ThesisRegistrationSubmitted(
     val requiredDocuments: List<DocumentInfo>,
     val submissionDate: LocalDateTime,
     val newState: MasterThesisStatus = MasterThesisStatus.STUDENT_THESIS_REGISTRATION
-)
+) : AbstractEvent(thesisId) {
+    override fun toExternalEvent(): Any? {
+        return this // or map to a DTO if you want a specific format
+    }
+}

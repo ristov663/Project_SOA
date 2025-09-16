@@ -1,6 +1,7 @@
 package mk.ukim.finki.soa.masterthesis.config
 
-import com.fasterxml.jackson.databind.ser.std.StringSerializer
+//import com.fasterxml.jackson.databind.ser.std.StringSerializer
+import org.apache.kafka.common.serialization.StringSerializer
 import org.apache.kafka.clients.admin.AdminClientConfig
 import org.apache.kafka.clients.admin.NewTopic
 import org.apache.kafka.clients.producer.ProducerConfig

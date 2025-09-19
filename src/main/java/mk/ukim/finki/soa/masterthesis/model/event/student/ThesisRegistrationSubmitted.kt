@@ -21,6 +21,6 @@ data class ThesisRegistrationSubmitted(
     val newState: MasterThesisStatus = MasterThesisStatus.STUDENT_THESIS_REGISTRATION
 ) : AbstractEvent(thesisId) {
     override fun toExternalEvent(): Any? {
-        return this // or map to a DTO if you want a specific format
+        return this
     }
 }

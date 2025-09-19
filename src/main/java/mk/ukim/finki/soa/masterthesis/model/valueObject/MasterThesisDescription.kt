@@ -6,11 +6,13 @@ import jakarta.persistence.Embeddable
 @Embeddable
 data class MasterThesisDescription(@Column(name = "thesis_description") val value: String) {
 
-    protected constructor() : this("")
+    protected constructor() : this("<<undefined>>")
 
     init {
-        require(value.isNotBlank()) { "Description must not be blank." }
-        require(value.length in 10..1000) { "Description must be between 10 and 1000 characters." }
+        if (value != "<<undefined>>") {
+            require(value.isNotBlank()) { "Description must not be blank." }
+            require(value.length in 10..1000) { "Description must be between 10 and 1000 characters." }
+        }
     }
 
     override fun toString(): String = value

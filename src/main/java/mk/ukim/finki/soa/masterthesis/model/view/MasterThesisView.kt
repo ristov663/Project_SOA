@@ -4,13 +4,11 @@ import jakarta.persistence.*
 import mk.ukim.finki.soa.masterthesis.model.common.Identifier
 import mk.ukim.finki.soa.masterthesis.model.common.LabeledEntity
 import mk.ukim.finki.soa.masterthesis.model.valueObject.*
-import org.hibernate.annotations.Immutable
 import java.time.LocalDateTime
 
 
 @Entity
 @Table(name = "master_thesis_projection")
-@Immutable
 data class MasterThesisView(
 
     @EmbeddedId
@@ -21,32 +19,43 @@ data class MasterThesisView(
 
     @Enumerated(EnumType.STRING)
     @Column(name = "current_state")
-    val currentState: MasterThesisStatus? = null,
+    var currentState: MasterThesisStatus? = null,
 
     @Embedded
     @AttributeOverrides(
         AttributeOverride(name = "value", column = Column(name = "student_id"))
     )
-    val studentId: StudentId? = null,
+    var studentId: StudentId? = null,
 
     @Embedded
     @AttributeOverrides(
         AttributeOverride(name = "value", column = Column(name = "mentor_id"))
     )
-    val mentorId: ProfessorId? = null,
+    var mentorId: ProfessorId? = null,
 
     @Embedded
-    val title: MasterThesisTitle? = null,
+    var title: MasterThesisTitle? = null,
 
     @Embedded
-    val shortDescription: MasterThesisDescription? = null,
+    var shortDescription: MasterThesisDescription? = null,
 
     @Embedded
-    val field: MasterThesisArea? = null,
+    var field: MasterThesisArea? = null,
 
-    val submissionDate: LocalDateTime? = null,
+    var submissionDate: LocalDateTime? = null,
 
-    val lastUpdated: LocalDateTime? = null,
+    var lastUpdated: LocalDateTime? = null,
+
+    var studentEnrollmentValidated: Boolean = false,
+
+    @Embedded
+    @AttributeOverrides(
+        AttributeOverride(name = "program", column = Column(name = "enrollment_program")),
+        AttributeOverride(name = "year", column = Column(name = "enrollment_year"))
+    )
+    var studentEnrollmentInfo: Enrollment? = null,
+
+    var studentEnrollmentValidationDate: LocalDateTime? = null,
 
     // Validation tracking
     val mentorValidated: Boolean = false,
@@ -64,7 +73,7 @@ data class MasterThesisView(
         AttributeOverride(name = "validationDate", column = Column(name = "secretary_validation_date")),
         AttributeOverride(name = "phase", column = Column(name = "secretary_validation_phase"))
     )
-    val secretaryValidations: List<SecretaryValidation> = emptyList(),
+    var secretaryValidations: MutableList<SecretaryValidation> = mutableListOf(),
 
     // Documents tracking
     @ElementCollection(fetch = FetchType.LAZY)
@@ -81,7 +90,7 @@ data class MasterThesisView(
         AttributeOverride(name = "uploadedBy.value", column = Column(name = "required_document_uploaded_by")),
         AttributeOverride(name = "documentType", column = Column(name = "required_document_type"))
     )
-    val requiredDocuments: List<DocumentInfo> = emptyList(),
+    var requiredDocuments: MutableList<DocumentInfo> = mutableListOf(),
 
     @Embedded
     @AttributeOverrides(
@@ -93,7 +102,7 @@ data class MasterThesisView(
         AttributeOverride(name = "uploadedBy.value", column = Column(name = "thesis_draft_uploaded_by")),
         AttributeOverride(name = "documentType", column = Column(name = "thesis_draft_document_type"))
     )
-    val thesisDraft: DocumentInfo? = null,
+    var thesisDraft: DocumentInfo? = null,
 
     @Embedded
     @AttributeOverrides(
@@ -105,7 +114,7 @@ data class MasterThesisView(
         AttributeOverride(name = "uploadedBy.value", column = Column(name = "revised_draft_uploaded_by")),
         AttributeOverride(name = "documentType", column = Column(name = "revised_draft_document_type"))
     )
-    val revisedDraft: DocumentInfo? = null,
+    var revisedDraft: DocumentInfo? = null,
 
     @Embedded
     @AttributeOverrides(
@@ -117,26 +126,26 @@ data class MasterThesisView(
         AttributeOverride(name = "uploadedBy.value", column = Column(name = "commission_report_uploaded_by")),
         AttributeOverride(name = "documentType", column = Column(name = "commission_report_document_type"))
     )
-    val commissionReport: DocumentInfo? = null,
+    var commissionReport: DocumentInfo? = null,
 
     // Commission tracking
     @Embedded
     @AttributeOverrides(
         AttributeOverride(name = "value", column = Column(name = "commission_member_1_id"))
     )
-    val commissionMember1Id: ExternalUserId? = null,
+    var commissionMember1Id: ExternalUserId? = null,
 
     @Embedded
     @AttributeOverrides(
         AttributeOverride(name = "value", column = Column(name = "commission_member_2_id"))
     )
-    val commissionMember2Id: ExternalUserId? = null,
+    var commissionMember2Id: ExternalUserId? = null,
 
     @Embedded
     @AttributeOverrides(
         AttributeOverride(name = "value", column = Column(name = "commission_coordinator_id"))
     )
-    val commissionCoordinatorId: ExternalUserId? = null,
+    var commissionCoordinatorId: ExternalUserId? = null,
 
     // Archive tracking
     @ElementCollection(fetch = FetchType.LAZY)
@@ -148,20 +157,20 @@ data class MasterThesisView(
         AttributeOverride(name = "value", column = Column(name = "archive_number_value")),
         AttributeOverride(name = "archiveDate", column = Column(name = "archive_date"))
     )
-    val archiveNumbers: List<ArchiveNumber> = emptyList(),
+    var archiveNumbers: MutableList<ArchiveNumber> = mutableListOf(),
 
     // Defense tracking
-    val defenseScheduled: Boolean = false,
-    val defenseDate: LocalDateTime? = null,
-    val roomId: String? = null,
-    val defended: Boolean = false,
+    var defenseScheduled: Boolean = false,
+    var defenseDate: LocalDateTime? = null,
+    var roomId: String? = null,
+    var defended: Boolean = false,
 
     @Embedded
-    val finalGrade: Grade? = null,
+    var finalGrade: Grade? = null,
 
     // Auto-approval tracking
-    val administrationValidationDate: LocalDateTime? = null,
-    val secondSecretaryValidationDate: LocalDateTime? = null
+    var administrationValidationDate: LocalDateTime? = null,
+    var secondSecretaryValidationDate: LocalDateTime? = null
 
 ) : LabeledEntity {
 

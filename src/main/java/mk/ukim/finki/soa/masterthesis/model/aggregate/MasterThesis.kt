@@ -17,6 +17,7 @@ import mk.ukim.finki.soa.masterthesis.model.command.mentor.SubmitCommissionRepor
 import mk.ukim.finki.soa.masterthesis.model.command.mentor.UploadRevisedThesisDraft
 import mk.ukim.finki.soa.masterthesis.model.command.mentor.UploadThesisDraft
 import mk.ukim.finki.soa.masterthesis.model.command.mentor.ValidateThesisByMentor
+import mk.ukim.finki.soa.masterthesis.model.command.student.ConfirmStudentEnrollmentForThesis
 import mk.ukim.finki.soa.masterthesis.model.command.student.SubmitThesisRegistration
 import mk.ukim.finki.soa.masterthesis.model.command.system.AutoApproveCommissionValidation
 import mk.ukim.finki.soa.masterthesis.model.command.system.AutoApproveSecondCommissionValidation
@@ -36,6 +37,7 @@ import mk.ukim.finki.soa.masterthesis.model.event.mentor.ThesisDefenseScheduled
 import mk.ukim.finki.soa.masterthesis.model.event.mentor.ThesisDraftUploaded
 import mk.ukim.finki.soa.masterthesis.model.event.mentor.ThesisMarkedAsDefended
 import mk.ukim.finki.soa.masterthesis.model.event.mentor.ThesisValidatedByMentor
+import mk.ukim.finki.soa.masterthesis.model.event.student.StudentEnrollmentConfirmedOnThesis
 import mk.ukim.finki.soa.masterthesis.model.event.student.ThesisRegistrationSubmitted
 import mk.ukim.finki.soa.masterthesis.model.event.system.CommissionValidationAutoApproved
 import mk.ukim.finki.soa.masterthesis.model.event.system.SecondCommissionValidationAutoApproved
@@ -87,6 +89,11 @@ class MasterThesis {
     private var roomId: String? = null
     private var defended: Boolean = false
     private var finalGrade: Grade? = null
+
+    // Enrollment tracking (new)
+    private var studentEnrollmentValidated: Boolean = false
+    private var studentEnrollmentInfo: Enrollment? = null
+    private var studentEnrollmentValidationDate: java.time.LocalDateTime? = null
 
     // Auto-approval tracking
     private var administrationValidationDate: LocalDateTime? = null
@@ -472,6 +479,26 @@ class MasterThesis {
         )
     }
 
+    @CommandHandler
+    fun handle(command: ConfirmStudentEnrollmentForThesis) {
+        // allow only when thesis is in registration state
+        validateState(MasterThesisStatus.STUDENT_THESIS_REGISTRATION, "Confirm student enrollment")
+
+        // Check that this aggregate indeed belongs to the provided student
+        if (this.studentId?.baseValue() != command.studentId.baseValue()) {
+            throw UnauthorizedThesisOperationException("Enrollment confirmation does not match thesis student")
+        }
+
+        AggregateLifecycle.apply(
+            StudentEnrollmentConfirmedOnThesis(
+                thesisId = command.thesisId,
+                studentId = command.studentId,
+                enrollment = command.enrollment,
+                validationDate = command.validationDate
+            )
+        )
+    }
+
     // ====================
     // EVENT SOURCING HANDLERS
     // ====================
@@ -484,7 +511,7 @@ class MasterThesis {
         this.mentorId = event.mentorId
         this.title = event.title
         this.shortDescription = event.shortDescription
-        this.requiredDocuments.addAll(event.requiredDocuments)
+        this.requiredDocuments = event.requiredDocuments.toMutableList()
         this.submissionDate = event.submissionDate
         this.lastUpdated = event.submissionDate
     }
@@ -623,6 +650,14 @@ class MasterThesis {
         this.defended = true
         this.finalGrade = event.finalGrade
         this.lastUpdated = event.defenseDate
+    }
+
+    @EventSourcingHandler
+    fun on(event: StudentEnrollmentConfirmedOnThesis) {
+        this.studentEnrollmentValidated = true
+        this.studentEnrollmentInfo = event.enrollment
+        this.studentEnrollmentValidationDate = event.validationDate
+        this.lastUpdated = event.validationDate
     }
 
     // ====================

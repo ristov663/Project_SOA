@@ -170,7 +170,6 @@ data class MasterThesisView(
 
     // Auto-approval tracking
     var administrationValidationDate: LocalDateTime? = null,
-    var secondSecretaryValidationDate: LocalDateTime? = null,
 
     // Archive tracking
     var archiveProcessValidated: Boolean = false,

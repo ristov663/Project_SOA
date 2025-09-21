@@ -3,6 +3,8 @@ package mk.ukim.finki.soa.masterthesis.handlers.eventHandlers
 import mk.ukim.finki.soa.masterthesis.model.event.administration.*
 import mk.ukim.finki.soa.masterthesis.model.event.mentor.*
 import mk.ukim.finki.soa.masterthesis.model.event.student.ThesisRegistrationSubmitted
+import mk.ukim.finki.soa.masterthesis.model.event.system.CommissionValidationAutoApproved
+import mk.ukim.finki.soa.masterthesis.model.event.system.SecondCommissionValidationAutoApproved
 import mk.ukim.finki.soa.masterthesis.model.valueObject.SecretaryValidation
 import mk.ukim.finki.soa.masterthesis.model.view.MasterThesisView
 import mk.ukim.finki.soa.masterthesis.repository.MasterThesisViewRepository
@@ -177,8 +179,14 @@ class MasterThesisProjectionHandler(
             ?: return
 
         thesisView.currentState = event.newState
-        thesisView.secondSecretaryValidationDate = event.validationDate
-        thesisView.archiveNumbers.add(event.commissionArchiveNumber)
+        thesisView.secretaryValidations.add(
+            SecretaryValidation(
+                secretaryId = event.secretaryId,
+                archiveNumber = event.commissionArchiveNumber,
+                validationDate = event.validationDate,
+                phase = "SECOND_SECRETARY_VALIDATION"
+            )
+        )
         thesisView.lastUpdated = event.validationDate
 
         masterThesisViewRepository.save(thesisView)
@@ -228,8 +236,14 @@ class MasterThesisProjectionHandler(
             ?: return
 
         thesisView.currentState = event.newState
-        thesisView.secondSecretaryValidationDate = event.validationDate // reuse column for secretary validations
-        thesisView.archiveNumbers.add(event.archiveNumber)
+        thesisView.secretaryValidations.add(
+            SecretaryValidation(
+                secretaryId = event.secretaryId,
+                archiveNumber = event.archiveNumber,
+                validationDate = event.validationDate,
+                phase = "FOURTH_SECRETARY_VALIDATION"
+            )
+        )
         thesisView.lastUpdated = event.validationDate
 
         masterThesisViewRepository.save(thesisView)
@@ -286,4 +300,29 @@ class MasterThesisProjectionHandler(
     // SYSTEM EVENTS
     // =====================================
 
+    @EventHandler
+    @Transactional
+    fun on(event: CommissionValidationAutoApproved) {
+        val thesisView = masterThesisViewRepository.findById(event.thesisId).orElse(null)
+            ?: return
+
+        thesisView.currentState = event.newState
+        thesisView.commissionValidated = true
+        thesisView.lastUpdated = event.autoApprovalDate
+
+        masterThesisViewRepository.save(thesisView)
+    }
+
+    @EventHandler
+    @Transactional
+    fun on(event: SecondCommissionValidationAutoApproved) {
+        val thesisView = masterThesisViewRepository.findById(event.thesisId).orElse(null)
+            ?: return
+
+        thesisView.currentState = event.newState
+        thesisView.commissionValidated = true
+        thesisView.lastUpdated = event.autoApprovalDate
+
+        masterThesisViewRepository.save(thesisView)
+    }
 }

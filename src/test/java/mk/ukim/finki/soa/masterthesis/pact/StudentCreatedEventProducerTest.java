@@ -11,13 +11,14 @@ import au.com.dius.pact.provider.junit5.PactVerificationContext;
 import au.com.dius.pact.provider.junit5.PactVerificationInvocationContextProvider;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import mk.ukim.finki.soa.masterthesis.model.event.external.StudentEnrollmentValidate;
+import mk.ukim.finki.soa.masterthesis.model.event.student.StudentEnrollmentConfirmedOnThesis;
 import mk.ukim.finki.soa.masterthesis.model.valueObject.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDateTime;
 import java.util.Map;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -47,13 +48,11 @@ public class StudentCreatedEventProducerTest {
 
     @PactVerifyProvider("Student Created Event")
     public MessageAndMetadata verifyMessage() throws JsonProcessingException {
-        StudentEnrollmentValidate event = new StudentEnrollmentValidate(
+        StudentEnrollmentConfirmedOnThesis event = new StudentEnrollmentConfirmedOnThesis(
+                new MasterThesisId(),
                 new StudentId("Student:00000000-0000-0000-0000-000000000001"),
-                "Bojan Ristov",
-                new Email("bojan.ristov@students.finki.ukim.mk"),
-                new StudentIndex("211151"),
                 new Enrollment("Software Engineering and Information Technologies", 2025),
-                true
+                LocalDateTime.of(2025, 10, 15, 0, 0)
         );
 
         ObjectMapper objectMapper = new ObjectMapper();

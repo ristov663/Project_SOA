@@ -8,14 +8,12 @@ import au.com.dius.pact.consumer.junit5.PactTestFor;
 import au.com.dius.pact.model.RequestResponsePact;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ExtendWith(PactConsumerTestExt.class)
 @PactTestFor(providerName = "student_provider", hostInterface = "localhost")
 class PactStudentServiceUnitTest {
@@ -35,20 +33,20 @@ class PactStudentServiceUnitTest {
                 .headers(headers)
                 .body(
                         """
-                        {
-                            "id": {
-                                "value": "Student:00000000-0000-0000-0000-000000000001"
-                            },
-                            "name": "Anastasija Tashkova",
-                            "email": "anastasija.tashkova@students.finki.ukim.mk",
-                            "studentIndex": "211299",
-                            "enrollment": {
-                                "program": "Software engineering and information systems",
-                                "year": 4
-                            },
-                            "validated": true
-                        }
-                        """.trim()
+                                {
+                                    "id": {
+                                        "value": "Student:00000000-0000-0000-0000-000000000001"
+                                    },
+                                    "name": "Anastasija Tashkova",
+                                    "email": "anastasija.tashkova@students.finki.ukim.mk",
+                                    "studentIndex": "211299",
+                                    "enrollment": {
+                                        "program": "Software engineering and information systems",
+                                        "year": 4
+                                    },
+                                    "validated": true
+                                }
+                                """.trim()
                 )
                 .toPact();
     }

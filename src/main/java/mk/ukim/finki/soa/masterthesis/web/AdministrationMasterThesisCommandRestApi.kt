@@ -45,7 +45,7 @@ class AdministrationMasterThesisCommandRestApi(
         val command = ArchiveThesis(
             thesisId = dto.thesisId,
             administratorId = dto.administratorId,
-            processValidated = dto.processValidated,
+            archiveProcessValidated = dto.archiveProcessValidated,
             remarks = dto.remarks,
             archiveDate = dto.archiveDate
         )

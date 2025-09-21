@@ -14,5 +14,5 @@ data class SecretaryValidation(
 
     val validationDate: LocalDateTime = LocalDateTime.MIN,
 
-    val phase: Int = 0
+    val phase: String = ""
 )

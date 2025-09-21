@@ -121,7 +121,7 @@ class MentorMasterThesisCommandRestApi(
         val command = UploadThesisDraft(
             thesisId = dto.thesisId,
             mentorId = dto.mentorId,
-            draftDocumentType = dto.draftDocumentType,
+            draftDocument = dto.draftDocument,
             remarks = dto.remarks,
             uploadDate = dto.uploadDate
         )

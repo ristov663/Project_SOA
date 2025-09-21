@@ -8,12 +8,15 @@ data class ArchiveNumber(
     val value: String,
     val archiveDate: LocalDateTime? = null
 ) {
+
     protected constructor() : this("")
 
     init {
-        require(value.isNotBlank()) { "Archive number must not be blank." }
-        require(value.matches(Regex("^[A-Za-z0-9/\\-_.]+$"))) {
-            "Invalid archive number format: $value"
+        if (value.isNotEmpty()) { // Hibernate calls with "" → skip validation
+            require(value.isNotBlank()) { "Archive number must not be blank." }
+            require(value.matches(Regex("^[A-Za-z0-9/\\-_.]+$"))) {
+                "Invalid archive number format: $value"
+            }
         }
     }
 

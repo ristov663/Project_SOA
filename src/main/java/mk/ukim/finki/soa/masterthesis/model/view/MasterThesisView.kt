@@ -58,9 +58,9 @@ data class MasterThesisView(
     var studentEnrollmentValidationDate: LocalDateTime? = null,
 
     // Validation tracking
-    val mentorValidated: Boolean = false,
-    val administrationValidated: Boolean = false,
-    val commissionValidated: Boolean = false,
+    var mentorValidated: Boolean = false,
+    var administrationValidated: Boolean = false,
+    var commissionValidated: Boolean = false,
 
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(
@@ -170,7 +170,11 @@ data class MasterThesisView(
 
     // Auto-approval tracking
     var administrationValidationDate: LocalDateTime? = null,
-    var secondSecretaryValidationDate: LocalDateTime? = null
+    var secondSecretaryValidationDate: LocalDateTime? = null,
+
+    // Archive tracking
+    var archiveProcessValidated: Boolean = false,
+    var archiveDate: LocalDateTime? = null,
 
 ) : LabeledEntity {
 

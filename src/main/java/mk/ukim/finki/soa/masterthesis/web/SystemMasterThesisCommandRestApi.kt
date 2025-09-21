@@ -18,7 +18,6 @@ import org.springframework.security.access.prepost.PreAuthorize
     name = "System Master Thesis Command API",
     description = "Commands by system for master thesis process."
 )
-@PreAuthorize("hasRole('ADMIN') or hasRole('DEAN') or hasRole('ADMINISTRATION')")
 class SystemMasterThesisCommandRestApi(
     private val systemMasterThesisService: SystemMasterThesisService
 ) {

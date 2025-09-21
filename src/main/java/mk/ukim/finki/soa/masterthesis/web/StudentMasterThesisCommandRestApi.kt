@@ -25,7 +25,6 @@ class StudentMasterThesisCommandRestApi(
     @Operation(summary = "Submit thesis registration",
         security = [io.swagger.v3.oas.annotations.security.SecurityRequirement(name = "bearerAuth")])
     @PostMapping("/submit-thesis")
-    @PreAuthorize("hasRole('STUDENT') or hasRole('ADMIN')")
     fun submitThesisRegistration(@RequestBody dto: SubmitThesisRegistrationDto): ResponseEntity<Any> {
         val command = SubmitThesisRegistration(
             thesisId = dto.thesisId,

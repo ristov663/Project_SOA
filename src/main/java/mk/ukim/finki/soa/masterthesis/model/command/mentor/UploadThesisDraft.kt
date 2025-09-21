@@ -10,7 +10,7 @@ data class UploadThesisDraft(
     @TargetAggregateIdentifier
     val thesisId: MasterThesisId,
     val mentorId: ProfessorId,
-    val draftDocumentType: DocumentInfo,
+    val draftDocument: DocumentInfo,
     val remarks: String?,
     val uploadDate: LocalDateTime = LocalDateTime.now()
 )

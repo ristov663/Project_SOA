@@ -8,7 +8,7 @@ import java.time.LocalDateTime
 data class ThesisArchived(
     val thesisId: MasterThesisId,
     val administratorId: ExternalUserId,
-    val processValidated: Boolean,
+    val archiveProcessValidated: Boolean,
     val remarks: String?,
     val archiveDate: LocalDateTime,
     val newState: MasterThesisStatus = MasterThesisStatus.ADMINISTRATION_ARCHIVING

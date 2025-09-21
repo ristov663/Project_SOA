@@ -9,7 +9,10 @@ data class Grade(@Column(name = "grade") val value: Int) {
     protected constructor() : this(0)
 
     init {
-        require(value in 5..10) { "Grade must be between 5 and 10." }
+        // Only validate when value is not 0 (0 used for internal persistence instantiation)
+        if (value != 0) {
+            require(value in 5..10) { "Grade must be between 5 and 10." }
+        }
     }
 
     override fun toString(): String = value.toString()

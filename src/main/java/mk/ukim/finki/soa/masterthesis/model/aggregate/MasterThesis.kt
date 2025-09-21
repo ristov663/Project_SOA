@@ -234,13 +234,13 @@ class MasterThesis {
         validateMentorAuthorization(command.mentorId)
 
         // Business rule: Validate document
-        validateDocument(command.draftDocumentType)
+        validateDocument(command.draftDocument)
 
         AggregateLifecycle.apply(
             ThesisDraftUploaded(
                 thesisId = command.thesisId,
                 mentorId = command.mentorId,
-                draftDocument = command.draftDocumentType,
+                draftDocument = command.draftDocument,
                 remarks = command.remarks,
                 uploadDate = command.uploadDate
             )
@@ -418,7 +418,7 @@ class MasterThesis {
         validateState(MasterThesisStatus.FOURTH_SECRETARY_VALIDATION, "Thesis archiving")
 
         // Business rule: Process must be validated
-        if (!command.processValidated) {
+        if (!command.archiveProcessValidated) {
             throw ProcessValidationException("Process validation must be completed before archiving")
         }
 
@@ -426,7 +426,7 @@ class MasterThesis {
             ThesisArchived(
                 thesisId = command.thesisId,
                 administratorId = command.administratorId,
-                processValidated = command.processValidated,
+                archiveProcessValidated = command.archiveProcessValidated,
                 remarks = command.remarks,
                 archiveDate = command.archiveDate
             )
@@ -677,7 +677,7 @@ class MasterThesis {
     }
 
     private fun validateMentorAuthorization(commandMentorId: ProfessorId) {
-        if (this.mentorId != commandMentorId) {
+        if (this.mentorId?.baseValue() != commandMentorId.baseValue()) {
             throw UnauthorizedThesisOperationException(
                 "Only the assigned mentor can perform this operation"
             )

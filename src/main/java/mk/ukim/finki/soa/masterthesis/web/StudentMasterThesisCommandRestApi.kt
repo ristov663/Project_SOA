@@ -37,6 +37,12 @@ class StudentMasterThesisCommandRestApi(
         )
 
         studentMasterThesisService.submitThesisRegistration(command)
-        return ResponseEntity.ok().build()
+        return ResponseEntity.ok(
+            mapOf(
+                "success" to true,
+                "message" to "Thesis registration submitted successfully",
+                "thesisId" to dto.thesisId
+            )
+        )
     }
 }

@@ -50,7 +50,7 @@ class AdministrationMasterThesisCommandRestApi(
         )
 
         administrationMasterThesisService.archiveThesis(command)
-        return ResponseEntity.ok().build()
+        return ResponseEntity.ok(mapOf("success" to true, "message" to "Thesis archived"))
     }
 
     @Operation(summary = "Secondary validate by teaching and research commission",
@@ -65,7 +65,7 @@ class AdministrationMasterThesisCommandRestApi(
             validationDate = dto.validationDate
         )
         administrationMasterThesisService.secondaryValidateByTeachingAndResearchCommission(command)
-        return ResponseEntity.ok().build()
+        return ResponseEntity.ok(mapOf("success" to true, "message" to "Validation completed"))
     }
 
     @Operation(summary = "Validate thesis by administration",
@@ -83,7 +83,7 @@ class AdministrationMasterThesisCommandRestApi(
         )
 
         administrationMasterThesisService.validateThesisByAdministration(command)
-        return ResponseEntity.ok().build()
+        return ResponseEntity.ok(mapOf("success" to true, "message" to "Thesis validated by administration"))
     }
 
     @Operation(summary = "Validate thesis by commission",
@@ -99,7 +99,7 @@ class AdministrationMasterThesisCommandRestApi(
         )
 
         administrationMasterThesisService.validateThesisByCommission(command)
-        return ResponseEntity.ok().build()
+        return ResponseEntity.ok(mapOf("success" to true, "message" to "Thesis validated by commission"))
     }
 
     @Operation(summary = "Validate thesis by secretary",
@@ -115,7 +115,7 @@ class AdministrationMasterThesisCommandRestApi(
         )
 
         administrationMasterThesisService.validateThesisBySecretary(command)
-        return ResponseEntity.ok().build()
+        return ResponseEntity.ok(mapOf("success" to true, "message" to "Thesis validated by secretary"))
     }
 
     @Operation(summary = "Validate second secretary phase",
@@ -131,7 +131,7 @@ class AdministrationMasterThesisCommandRestApi(
         )
 
         administrationMasterThesisService.validateSecondSecretaryPhase(command)
-        return ResponseEntity.ok().build()
+        return ResponseEntity.ok(mapOf("success" to true, "message" to "Second secretary phase validated"))
     }
 
     @Operation(summary = "Validate third secretary phase",
@@ -147,7 +147,7 @@ class AdministrationMasterThesisCommandRestApi(
         )
 
         administrationMasterThesisService.validateThirdSecretaryPhase(command)
-        return ResponseEntity.ok().build()
+        return ResponseEntity.ok(mapOf("success" to true, "message" to "Third secretary phase validated"))
     }
 
     @Operation(summary = "Validate fourth secretary phase",
@@ -163,6 +163,6 @@ class AdministrationMasterThesisCommandRestApi(
         )
 
         administrationMasterThesisService.validateFourthSecretaryPhase(command)
-        return ResponseEntity.ok().build()
+        return ResponseEntity.ok(mapOf("success" to true, "message" to "Fourth secretary phase validated"))
     }
 }

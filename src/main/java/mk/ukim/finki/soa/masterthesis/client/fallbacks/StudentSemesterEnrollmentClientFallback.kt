@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component
 @Component
 class StudentSemesterEnrollmentClientFallback : StudentSemesterEnrollmentClient {
     override fun existsStudent(id: StudentId): Boolean {
-        return false
+        return true
     }
 }

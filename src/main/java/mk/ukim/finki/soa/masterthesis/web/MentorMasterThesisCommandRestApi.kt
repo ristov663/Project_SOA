@@ -46,7 +46,7 @@ class MentorMasterThesisCommandRestApi(
             defenseRemarks = dto.defenseRemarks
         )
         mentorMasterThesisService.markThesisAsDefended(command)
-        return ResponseEntity.ok().build()
+        return ResponseEntity.ok(mapOf("success" to true, "message" to "Thesis marked as defended", "thesisId" to dto.thesisId))
     }
 
     @Operation(summary = "Schedule thesis defense",
@@ -62,7 +62,7 @@ class MentorMasterThesisCommandRestApi(
             schedulingDate = dto.schedulingDate
         )
         mentorMasterThesisService.scheduleThesisDefense(command)
-        return ResponseEntity.ok().build()
+        return ResponseEntity.ok(mapOf("success" to true, "message" to "Thesis defense scheduled", "thesisId" to dto.thesisId))
     }
 
     @Operation(summary = "Select commission members",
@@ -78,7 +78,7 @@ class MentorMasterThesisCommandRestApi(
             selectionDate = dto.selectionDate
         )
         mentorMasterThesisService.selectCommissionMembers(command)
-        return ResponseEntity.ok().build()
+        return ResponseEntity.ok(mapOf("success" to true, "message" to "Commission members selected", "thesisId" to dto.thesisId))
     }
 
     @Operation(summary = "Submit commission report",
@@ -95,7 +95,7 @@ class MentorMasterThesisCommandRestApi(
             submissionDate = dto.submissionDate
         )
         mentorMasterThesisService.submitCommissionReport(command)
-        return ResponseEntity.ok().build()
+        return ResponseEntity.ok(mapOf("success" to true, "message" to "Commission report submitted", "thesisId" to dto.thesisId))
     }
 
     @Operation(summary = "Upload revised thesis draft",
@@ -110,7 +110,7 @@ class MentorMasterThesisCommandRestApi(
             uploadDate = dto.uploadDate
         )
         mentorMasterThesisService.uploadRevisedThesisDraft(command)
-        return ResponseEntity.ok().build()
+        return ResponseEntity.ok(mapOf("success" to true, "message" to "Revised thesis draft uploaded", "thesisId" to dto.thesisId))
     }
 
     @Operation(summary = "Upload thesis draft",
@@ -125,7 +125,7 @@ class MentorMasterThesisCommandRestApi(
             uploadDate = dto.uploadDate
         )
         mentorMasterThesisService.uploadThesisDraft(command)
-        return ResponseEntity.ok().build()
+        return ResponseEntity.ok(mapOf("success" to true, "message" to "Thesis draft uploaded", "thesisId" to dto.thesisId))
     }
 
     @Operation(summary = "Validate thesis by mentor",
@@ -141,6 +141,6 @@ class MentorMasterThesisCommandRestApi(
             validationDate = dto.validationDate
         )
         mentorMasterThesisService.validateThesisByMentor(command)
-        return ResponseEntity.ok().build()
+        return ResponseEntity.ok(mapOf("success" to true, "message" to "Thesis validated by mentor", "thesisId" to dto.thesisId))
     }
 }

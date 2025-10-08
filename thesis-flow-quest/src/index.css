@@ -1,0 +1,168 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Master Thesis Management System Design System */
+
+@layer base {
+  :root {
+    /* White Mode: Dark Blue + White */
+    --background: 0 0% 100%;
+    --foreground: 220 60% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 60% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 60% 15%;
+
+    /* Dark Blue Primary */
+    --primary: 220 85% 25%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 220 90% 30%;
+    --primary-light: 220 50% 85%;
+
+    --secondary: 220 15% 96%;
+    --secondary-foreground: 220 60% 15%;
+
+    --muted: 220 10% 96%;
+    --muted-foreground: 220 20% 50%;
+
+    --accent: 220 25% 92%;
+    --accent-foreground: 220 60% 15%;
+
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+
+    --border: 220 15% 88%;
+    --input: 220 15% 95%;
+    --ring: 220 85% 25%;
+
+    --radius: 0.75rem;
+
+    /* Sidebar theming */
+    --sidebar-background: 220 85% 25%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 220 90% 30%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 80% 30%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 220 70% 35%;
+    --sidebar-ring: 220 85% 60%;
+
+    /* Custom gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(220, 85%, 25%), hsl(220, 90%, 35%));
+    --gradient-subtle: linear-gradient(180deg, hsl(0, 0%, 100%), hsl(220, 10%, 98%));
+    --gradient-header: linear-gradient(90deg, hsl(220, 85%, 25%), hsl(220, 80%, 30%));
+
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -4px hsl(220, 25%, 80%);
+    --shadow-medium: 0 8px 25px -5px hsl(220, 30%, 70%);
+    --shadow-strong: 0 15px 35px -10px hsl(220, 40%, 60%);
+
+    /* Animation transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.15s ease-out;
+  }
+
+  .dark {
+    /* Black Mode: Light Blue + White */
+    --background: 220 25% 8%;
+    --foreground: 0 0% 100%;
+
+    --card: 220 20% 12%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 220 20% 12%;
+    --popover-foreground: 0 0% 100%;
+
+    /* Light Blue Primary */
+    --primary: 200 85% 65%;
+    --primary-foreground: 220 25% 8%;
+    --primary-hover: 200 90% 70%;
+    --primary-light: 200 50% 25%;
+
+    --secondary: 220 15% 18%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 220 12% 15%;
+    --muted-foreground: 220 15% 65%;
+
+    --accent: 220 20% 20%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 75% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 142 76% 50%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 38 92% 60%;
+    --warning-foreground: 0 0% 100%;
+
+    --border: 220 15% 25%;
+    --input: 220 15% 18%;
+    --ring: 200 85% 65%;
+
+    /* Sidebar theming for dark */
+    --sidebar-background: 220 20% 10%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 200 85% 65%;
+    --sidebar-primary-foreground: 220 25% 8%;
+    --sidebar-accent: 220 15% 20%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 220 15% 20%;
+    --sidebar-ring: 200 85% 65%;
+
+    /* Dark mode gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(200, 85%, 65%), hsl(200, 90%, 75%));
+    --gradient-subtle: linear-gradient(180deg, hsl(220, 25%, 8%), hsl(220, 20%, 12%));
+    --gradient-header: linear-gradient(90deg, hsl(200, 85%, 65%), hsl(200, 80%, 70%));
+
+    /* Dark mode shadows */
+    --shadow-soft: 0 4px 20px -4px hsl(220, 40%, 5%);
+    --shadow-medium: 0 8px 25px -5px hsl(220, 50%, 3%);
+    --shadow-strong: 0 15px 35px -10px hsl(220, 60%, 2%);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Utility classes for common patterns */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+@layer components {
+  /* Custom button variants for special actions */
+  .btn-gradient {
+    @apply bg-gradient-primary text-primary-foreground border-0 shadow-medium hover:shadow-strong transition-all duration-300;
+  }
+
+  /* Data table enhancements */
+  .data-table-header {
+    @apply bg-muted/50 font-semibold;
+  }
+
+  /* Card enhancements */
+  .stats-card {
+    @apply bg-gradient-subtle border-border/50 shadow-soft hover:shadow-medium transition-all duration-300;
+  }
+}

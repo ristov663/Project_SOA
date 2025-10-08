@@ -17,9 +17,6 @@ class UserService(
     fun register(email: String, username: String, password: String, role: AppRole = AppRole.GUEST): String {
         if (userRepository.findByEmail(email).isPresent) throw IllegalArgumentException("Email taken")
         if (userRepository.findByUsername(username).isPresent) throw IllegalArgumentException("Username taken")
-
-        if (!AppRole.values().contains(role)) throw IllegalArgumentException("Invalid role")
-
         val hashed = passwordEncoder.encode(password)
         val user = userRepository.save(User(username = username, email = email, password = hashed, role = role))
         return jwtUtil.generateToken(user)

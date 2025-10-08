@@ -8,6 +8,9 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.web.cors.CorsConfiguration
+import org.springframework.web.cors.CorsConfigurationSource
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 
 @Configuration
 @EnableWebSecurity
@@ -16,10 +19,25 @@ class SecurityConfig(
     private val jwtAuthenticationFilter: JwtAuthenticationFilter
 ) {
 
+    @Bean
+    fun corsConfigurationSource(): CorsConfigurationSource {
+        val configuration = CorsConfiguration()
+        configuration.allowedOrigins = listOf("http://localhost:8089")
+        configuration.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")
+        configuration.allowedHeaders = listOf("*")
+        configuration.allowCredentials = true
+        configuration.maxAge = 3600L
+
+        val source = UrlBasedCorsConfigurationSource()
+        source.registerCorsConfiguration("/**", configuration)
+        return source
+    }
+
     @Profile("prod")
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http
+            .cors { it.configurationSource(corsConfigurationSource()) }
             .headers { it.frameOptions { frame -> frame.disable() } }
             .csrf { it.disable() }
             .authorizeHttpRequests { auth ->
@@ -36,6 +54,7 @@ class SecurityConfig(
     @Bean
     fun filterChainDev(http: HttpSecurity): SecurityFilterChain {
         http
+            .cors { it.configurationSource(corsConfigurationSource()) }
             .headers { it.frameOptions { frame -> frame.disable() } }
             .csrf { it.disable() }
             .authorizeHttpRequests { auth ->

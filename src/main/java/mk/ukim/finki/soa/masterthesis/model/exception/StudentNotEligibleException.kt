@@ -1,7 +1,7 @@
 package mk.ukim.finki.soa.masterthesis.model.exception
 
-import mk.ukim.finki.soa.masterthesis.model.valueObject.StudentIndex
+import mk.ukim.finki.soa.masterthesis.model.valueObject.StudentId
 
 class StudentNotEligibleException(
-    val studentIndex: StudentIndex
-) : RuntimeException("Student with index $studentIndex is not eligible to register for a thesis.")
+    val studentId: StudentId
+) : RuntimeException("Student with id $studentId is not eligible to register for a thesis.")

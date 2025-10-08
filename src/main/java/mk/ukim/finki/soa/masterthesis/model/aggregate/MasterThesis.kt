@@ -1,5 +1,7 @@
 package mk.ukim.finki.soa.masterthesis.model.aggregate
 
+import mk.ukim.finki.soa.masterthesis.client.MentorValidationClient
+import mk.ukim.finki.soa.masterthesis.client.StudentSemesterEnrollmentClient
 import mk.ukim.finki.soa.masterthesis.model.exception.*
 import mk.ukim.finki.soa.masterthesis.model.command.*
 import mk.ukim.finki.soa.masterthesis.model.command.administration.ArchiveThesis
@@ -107,7 +109,16 @@ class MasterThesis {
     // ====================
 
     @CommandHandler
-    constructor(command: SubmitThesisRegistration) {
+    constructor(command: SubmitThesisRegistration, studentSemesterEnrollmentClient: StudentSemesterEnrollmentClient, mentorValidationClient: MentorValidationClient) {
+
+        if(!studentSemesterEnrollmentClient.existsStudent(command.studentId)){
+            throw StudentNotEligibleException(command.studentId)
+        }
+
+        if (!mentorValidationClient.existsMentor(command.mentorId)) {
+            throw MentorNotEligibleException(command.mentorId)
+        }
+
         // Business rule: Only allow registration in initial state
         validateInitialState()
 
